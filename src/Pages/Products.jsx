@@ -90,7 +90,7 @@ export default function Products() {
             <div className=
               {`  
             ${helloFilter ? 'max-[1024px]:transform max-[1024px]:translate-0' : 'max-[1024px]:transform max-[1024px]:translate-x-full'}
-            z-20 overflow-scroll transition-transform duration-1000 ease-in-out w-full h-full fixed bg-gray-700 text-center top-0 right-0
+            z-20 overflow-scroll transition-transform duration-1000 ease-in-out w-full h-full fixed bg-black text-center top-0 right-0
             lg:transition-none lg:static lg:h-full lg:w-full lg:inset-0 lg:overflow-hidden lg:transform lg:translate-0 lg:bg-black lg:bg-[#3e3e3e] lg:border-r lg:border-white
           `}>
               <button onClick={() => setHelloFilter(false)} className='float-right m-4 lg:hidden'>

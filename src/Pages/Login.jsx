@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../components/Nav'
 import Footer from '../components/Footer'
 import './login.css'
 import { redirect, useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import axios from 'axios'
+import Context from '../context'
 
 export default function Login() {
-
+    const {fetchUserDetails} = useContext(Context)
+  
     const handleSignUpClass = () => {
         document.querySelector('.container').classList.add('right-panel-active')
     }
@@ -43,6 +45,7 @@ export default function Login() {
                     setLoginAdvice("Login Success")
                     setPassLogin("")
                     setUserLogin("")
+                    fetchUserDetails()
                     navigate('/')
                 }else{
                     setLoginAdvice("Contraseña incorrecta")
