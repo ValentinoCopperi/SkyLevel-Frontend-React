@@ -38,16 +38,17 @@ export default function Product() {
       return prod.categoria == product.categoria || prod.marca == product.marca
     }
   })
-  console.log(relatedProducts)
   return (
     <section style={{ background: 'rgb(0,0,0) linear-gradient(170deg, rgba(0,0,0,1) 24%, rgba(78,0,103,1) 95%)' }}>
       <Navbar></Navbar>
       {/* CONTENEDOR PRODUCTO SELECCIONADO + PRODUCTOS RELACIONADOS */}
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
-        <section className='flex items-center border-b border-white shadow-lg shadow-violet-500/50'>
+        <section className='max-[700px]:flex-col
+        flex items-center border-b-4 border-white shadow-lg shadow-violet-500/50'>
           {/* DATOS PRODUCTO SELECCIONADO */}
-          <article className='   py-[300px] flex flex-col items-center justify-center text-white  w-1/2 px-6 text-center bg-[#202020] h-[430px]'>
+          <article className='max-[700px]:py-2
+          py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>
             <h1 className='text-orange-400 text-3xl'>{product.producto}</h1>
             <p className='my-5'>{product.datos}</p>
             <div className='flex'>
@@ -58,9 +59,11 @@ export default function Product() {
             </div>
           </article>
           {/* IMAGENES PRODUCTO SELECCIONADO */}
-          <article className='  py-[300px] w-1/2 flex items-center justify-center bg-[#202020] h-[430px]'>
-            <img src={`/productos/${mainImage}.png`} alt="" className='w-1/2' />
-            <div className='w-1/3 flex flex-col'>
+          <article className='max-[700px]:py-1 max-[700px]:pb-10 max-[700px]:flex-col max-[700px]:h-auto 
+            py-[300px]  flex items-center justify-center bg-[#202020] h-[430px] lg:w-1/2'>
+            <img src={`/productos/${mainImage}.png`} alt="" className='w-[90%] lg:w-1/2' />
+            <div className='flex flex-row w-[96%]
+              lg:flex lg:flex-col lg:w-1/3 '>
               <button className='border border-white mx-auto w-1/3' value={product.imagen_1} onClick={handleMainImage}>
                 <img src={`/productos/${product.imagen_1}.png`} alt="" />
               </button>
@@ -77,17 +80,18 @@ export default function Product() {
         {/* SECCION PRODUCTOS RELACIONADOS */}
         <section className='bg-[#202020]'>
             <h1 className='text-white text-center text-3xl py-5'>Productos Relacionados:</h1>
-            <div className='flex flex-wrap items-center justify-center'>
+            <div className=' max-[700px]:flex-col
+              flex flex-wrap items-center justify-center'>
                 {
                   relatedProducts.length ? 
                   relatedProducts.map((prod) => {
-                    return <article key={prod.id_producto} className='cursor-pointer p-10 bg-[#202020] w-1/3 m-5 hover:bg-black' style={{boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}>
+                    return <article key={prod.id_producto} className=' w-[85%] m-3 cursor-pointer p-10 bg-[#202430]  hover:bg-black lg:w-1/3 lg:m-5' style={{boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}>
                       <div className='h-full flex flex-col items-center justify-center'>
                         <img src={`/productos/${prod.imagen_1}.png`} alt="" className='w-[220px]' />
                         <h1 className='text-white'>{prod.producto}</h1>
                         <h5 className='text-orange-400'>{prod.marca} - {prod.categoria}</h5>
                         <div className='flex items-center mt-3'>
-                          <h5 className='text-zinc-500 border p-1 hover:text-orange-400'>
+                          <h5 className='text-zinc-500 border p-1 text-center hover:text-orange-400'>
                             <Link to={`/products/${prod.id_producto}`}>Descubre Mas</Link>
                           </h5>
                           <h5 className='text-zinc-500 border p-1 ml-4  hover:text-orange-400'>
