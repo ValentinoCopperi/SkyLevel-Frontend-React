@@ -1,8 +1,10 @@
-# React + Vite
+--Sky Level is a demo online computers and peripherals website --
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Technologies that i have used : 
+1-HTML
+2-React
+3-Taiwlind CSS
+4-Node JS
+5.Firebase...
+JWT , EXPRESS 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
