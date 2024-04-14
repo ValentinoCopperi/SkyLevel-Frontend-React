@@ -35,10 +35,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
 
-    console.log(navContact)
     let clase = '';
-
-
     stateNavNow ?
         clase = 'fixed w-full h-screen bg-black z-2 top-0 right-0 flex flex-col items-center justify-center'
         : clase = 'hidden  md:flex md:block';

@@ -15,7 +15,7 @@ export default function Home() {
     <section>
       <Navbar ></Navbar>
       <section style={{ background: 'black' }}
-        className='bg-black pt-[14vh] md:pt-[10.5vh] lg:pt-[11vh] xl:pt-[7.5vh]'>
+        className={stateNavNow ? 'hidden' : 'bg-black pt-[14vh] md:pt-[10.5vh] lg:pt-[11vh] xl:pt-[7.5vh]'}>
         <div style={{
           backgroundImage: 'url(img/bg-contacto.png)',
           backgroundPosition: 'center',
@@ -36,7 +36,7 @@ export default function Home() {
             }}
               className='w-1/3  m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2'>
               <h1 className='text-center font-black lg:text-2xl'>Cuenta y seguridad</h1>
-              <i class="fa-solid fa-user-lock lg:text-3xl"></i>
+              <i className="fa-solid fa-user-lock lg:text-3xl"></i>
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -44,7 +44,7 @@ export default function Home() {
             }}
               className='w-1/3 m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px]  lg:m-2'>
               <h1 className='text-center font-black lg:text-2xl'>PC</h1>
-              <i class="fa-solid fa-laptop lg:text-3xl"></i>
+              <i className="fa-solid fa-laptop lg:text-3xl"></i>
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -52,7 +52,7 @@ export default function Home() {
             }}
               className='w-1/3  m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2'>
               <h1 className='text-center font-black lg:text-2xl'>Pagos y rembolsos</h1>
-              <i class="fa-solid fa-credit-card lg:text-3xl"></i>
+              <i className="fa-solid fa-credit-card lg:text-3xl"></i>
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -60,7 +60,7 @@ export default function Home() {
             }}
               className='w-1/3 m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2'>
               <h1 className='text-center font-black lg:text-2xl'>Reparaciones</h1>
-              <i class="fa-solid fa-wrench lg:text-3xl"></i>
+              <i className="fa-solid fa-wrench lg:text-3xl"></i>
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -68,7 +68,7 @@ export default function Home() {
             }}
               className='w-1/3 m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2 '>
               <h1 className='text-center font-black lg:text-2xl'>Seguridad</h1>
-              <i class="fa-solid fa-shield-halved lg:text-3xl"></i>
+              <i className="fa-solid fa-shield-halved lg:text-3xl"></i>
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -76,7 +76,7 @@ export default function Home() {
             }}
               className='w-1/3  m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2'>
               <h1 className='text-center font-black lg:text-2xl'>Envios</h1>
-              <i class="fa-solid fa-truck lg:text-3xl"></i>
+              <i className="fa-solid fa-truck lg:text-3xl"></i>
             </div>
           </div>
 
