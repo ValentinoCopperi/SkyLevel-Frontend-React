@@ -3,10 +3,11 @@ import Navbar from '../components/Nav'
 import Footer from '../components/Footer'
 import ShowProducts from '../components/ShowProducts';
 import FiltersOptions from '../components/FiltersOptions';
-import BannerProductos from '../components/BannerProductos';
+import Carousel from '../components/BannerProductos';
 import 'animate.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { appearNavRedux, hiddeNav, stateNav } from '../features/nav/navSlice'
+
 
 
 
@@ -64,7 +65,6 @@ export default function Products() {
   }
 
   
-
   return (
     <div>
       <Navbar  ></Navbar>
@@ -77,12 +77,13 @@ export default function Products() {
         </section>
 
         {/* BANNER PRODUCTOS */}
-       <BannerProductos></BannerProductos>
+        
+       <Carousel />
 
         <div className='lg:flex'>
           {/* FILTERS */}
           <div style={{ background: '#3e3e3e', position: 'relative' }} className='lg:w-[15%]  lg:py-0 lg:border-t lg:border-white'>
-            <button style={{ border: '1px solid white', padding: '5px' }} className='lg:hidden' onClick={() => {
+            <button style={{ border: '1px solid white', padding: '5px' }} className='w-full lg:hidden' onClick={() => {
               setHelloFilter(true)
             }}>
               <i className="fa-solid fa-filter text-white">FILTER</i>
