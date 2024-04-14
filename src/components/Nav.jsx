@@ -41,7 +41,7 @@ export default function Navbar() {
     stateNavNow ?
         clase = 'fixed w-full h-screen bg-black z-2 top-0 right-0 flex flex-col items-center justify-center'
         : clase = 'hidden  md:flex md:block';
-    
+
 
     return <>
         <section>
@@ -51,7 +51,7 @@ export default function Navbar() {
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 width: '100%',
-                padding: '20px 0',
+                padding: '10px 0',
                 borderBottom: '2px solid white',
                 zIndex: '10',
                 transition: 'background-color 1s linear',
@@ -83,36 +83,40 @@ export default function Navbar() {
                                 Contact
                             </NavLink>
                         </button>
-                        {
-                            user?.id ?
-
-                                <button className='my-9 text-white text-xl md:mx-4 md:my-0' onClick={handleLogout}>
-                                    Logout
-                                </button>
-                                :
-                                <button className='my-9 text-white text-xl md:mx-4 md:my-0'>
-                                    <NavLink to='/login' className={({ isActive }) => isActive ? "underline" : ""}>
-                                        Login
-                                    </NavLink>
-                                </button>
-
-                        }
-                        <button className={stateNavNow ? 'flex block' : 'hidden'} onClick={() =>  dispatch(setNav(false))}>
+                        <button className={stateNavNow ? 'flex block' : 'hidden'} onClick={() => dispatch(setNav(false))}>
                             <i className="fa-solid fa-x fa-2xl " style={{ color: '#8A2BE2' }}></i>
                         </button>
+                       
                     </ul>
                 </div>
-                <div className='flex items-center pr-4'>
-                    <button style={{
-                        textShadow: '0 0 1px #FFF, 0 0 1px #FFF, 0 0 1px #FFF, 0 0 10px #A115FF, 0 0 20px #A115FF, 0 0 20px #A115FF, 0 0 55px #A115FF, 0 0 75px #A115FF'
-                    }}>
-                        <i className="fa-solid fa-bag-shopping fa-xl pr-4" style={{ color: '#fff' }}>0</i>
-                    </button>
-                    <div className='block md:hidden'>
-                        <button onClick={() => dispatch(setNav(true)) } style={{ textShadow: '0 0 1px #FFF, 0 0 1px #FFF, 0 0 1px #FFF, 0 0 10px #A115FF, 0 0 20px #A115FF, 0 0 20px #A115FF, 0 0 55px #A115FF, 0 0 75px #A115FF' }}>
-                            <i className="fa-solid fa-bars fa-xl" style={{ color: '#fff' }}></i>
+                <div className='flex flex-col  md:flex md:flex-row md:items-center md:pr-4'>
+                    <div className='flex '>
+                        <button style={{
+                            textShadow: '0 0 1px #FFF, 0 0 1px #FFF, 0 0 1px #FFF, 0 0 10px #A115FF, 0 0 20px #A115FF, 0 0 20px #A115FF, 0 0 55px #A115FF, 0 0 75px #A115FF'
+                        }}>
+                            <i className="fa-solid fa-bag-shopping fa-xl pr-4" style={{ color: '#fff' }}>0</i>
                         </button>
+                    
+                        <div className='block md:hidden'>
+                            <button onClick={() => dispatch(setNav(true))} style={{ textShadow: '0 0 1px #FFF, 0 0 1px #FFF, 0 0 1px #FFF, 0 0 10px #A115FF, 0 0 20px #A115FF, 0 0 20px #A115FF, 0 0 55px #A115FF, 0 0 75px #A115FF' }}>
+                                <i className="fa-solid fa-bars fa-xl" style={{ color: '#fff' }}></i>
+                            </button>
+                        </div>
                     </div>
+                    {
+                        user?.id ?
+
+                            <button className='my-3 text-white text-xl bg-indigo-500 rounded-2xl px-3 w-full md:mx-4 md:my-0' onClick={handleLogout}>
+                                Logout
+                            </button>
+                            :
+                            <button className='my-3 text-white text-xl bg-indigo-500 rounded-2xl px-3 w-full  md:mx-4 md:my-0'>
+                                <NavLink to='/login' className={({ isActive }) => isActive ? "underline" : ""}>
+                                    Login
+                                </NavLink>
+                            </button>
+
+                    }
                 </div>
 
             </nav>

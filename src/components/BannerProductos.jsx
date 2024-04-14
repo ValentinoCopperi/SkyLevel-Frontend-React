@@ -25,7 +25,7 @@ export default function Carousel() {
       <article className='max-[700px]:w-[80%] w-[90%] mx-auto '  >      
       <Slider {...settings}>
           <div className='flex flex-col items-center justify-center' >
-            <h1 className='text-4xl text-orange-500 text-center'>Monitores</h1>
+            <h1 className='text-4xl text-orange-500 text-center' style={{fontFamily:'serif',fontSize:'bolder'}}>MONITORES</h1>
             <div className='flex items-center justify-center py-5'>
               <div className='flex flex-col items-center justify-center'>
                <img src="productos/Monitores-AORUS-FO32.png" alt="Imagen 1" className='w-[90%] drop-shadow-md hover:drop-shadow-2xl'/>
@@ -42,7 +42,7 @@ export default function Carousel() {
             </div>
           </div>
           <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-4xl text-orange-500 text-center'>Pc armadas</h1>
+            <h1 className='text-4xl text-orange-500 text-center' style={{fontFamily:'serif',fontSize:'bolder'}}>PC ARMADAS</h1>
             <div className='flex items-center justify-center'>
               <div className='flex flex-col items-center justify-center'>
                <img src="productos/Pc-EAGLE-X.png" alt="Imagen 1" className='w-[90%]'style={{filter:'drop-shadow(4px 6px 12px black)'}}/>
@@ -59,7 +59,7 @@ export default function Carousel() {
             </div>
           </div>
           <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-4xl text-orange-500 text-center'>Laptops</h1>
+            <h1 className='text-4xl text-orange-500 text-center' style={{fontFamily:'serif',fontSize:'bolder'}}>LAPTOPS</h1>
             <div className='flex items-center justify-center'>
               <div className='flex flex-col items-center justify-center'>
                <img src="productos/Laptops-GIGABYTE-A7.png" alt="Imagen 1" className='w-[70%] drop-shadow-2xl'  />
