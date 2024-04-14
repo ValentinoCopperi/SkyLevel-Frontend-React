@@ -8,6 +8,7 @@ import { setMobile, stateMobile } from "../features/mobile/mobileSlice"
 
 
 export default function Navbar() {
+    const[navContact,setNavContact] = useState()
     const user = useSelector(state => state?.user?.user)
     const navigate = useNavigate()
     const stateNavNow = useSelector(state => state.nav.navValue)
@@ -34,7 +35,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
 
-
+    console.log(navContact)
     let clase = '';
 
 
@@ -55,7 +56,7 @@ export default function Navbar() {
                 borderBottom: '2px solid white',
                 zIndex: '10',
                 transition: 'background-color 1s linear',
-
+                background : navContact ? 'black' : ''
             }}>
                 <h1 style={{
                     fontSize: '2rem',
@@ -79,7 +80,15 @@ export default function Navbar() {
                             </NavLink>
                         </button>
                         <button className='my-9 text-white text-xl md:mx-4 md:my-0'>
-                            <NavLink to='/contact' className={({ isActive }) => isActive ? "underline" : ""}>
+                            <NavLink to='/contact' className={({ isActive }) => 
+                            {
+                                if(isActive){
+                                    setNavContact(true)
+                                    return 'underline'
+                                }else{
+                                    return ''
+                                }
+                            }}>
                                 Contact
                             </NavLink>
                         </button>
