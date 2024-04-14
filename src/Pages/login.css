@@ -40,7 +40,7 @@
 	margin: 15px 0;
 }
 
-.container button {
+.ghost{
 	border-radius: 20px;
 	border: 1px solid #FF4B2B;
 	background-color: #FF4B2B;
@@ -53,11 +53,11 @@
 	transition: transform 80ms ease-in;
 }
 
-button:active {
+.ghost:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+.ghost:focus {
 	outline: none;
 }
 

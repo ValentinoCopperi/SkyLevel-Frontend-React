@@ -11,9 +11,9 @@ export default function Login() {
     const { fetchUserDetails } = useContext(Context)
 
     const {
-        register : registerLogin,
+        register: registerLogin,
         handleSubmit: loginSubmit,
-        formState: { errors : errorsLogin }
+        formState: { errors: errorsLogin }
     } = useForm({
         defaultValues: {
             emailLogin: '',
@@ -24,7 +24,7 @@ export default function Login() {
     const {
         register: registerRegister,
         handleSubmit: handleRegisterSubmit,
-        formState: { errors : errorsRegister },
+        formState: { errors: errorsRegister },
         watch
     } = useForm({
         defaultValues: {
@@ -47,8 +47,9 @@ export default function Login() {
         document.querySelector('.container').classList.remove('right-panel-active')
     }
 
-    const[errorDatos , setErrorDatos] = useState(false)
-
+    const [errorDatos, setErrorDatos] = useState(false)
+    const [showLoginPass, setShowLoginPass] = useState(false)
+    const [showRegisterPass, setShowRegisterPass] = useState(false)
 
 
     const handdleLogin = loginSubmit((data) => {
@@ -74,7 +75,7 @@ export default function Login() {
             })
     })
 
-    
+
     const handleRegister = handleRegisterSubmit((data) => {
         const datos = {
             user: data.emailRegister,
@@ -121,27 +122,36 @@ export default function Login() {
                             {
                                 errorsRegister.emailRegister && <span className='text-red-400'>{errorsRegister.emailRegister?.message}</span>
                             }
-                            <input type="password" placeholder="Password"
-                                {
-                                ...registerRegister('passwordRegister', {
-                                    required: {
-                                        value: true,
-                                        message: 'Password is required'
-                                    },
-                                    minLength: {
-                                        value: 6,
-                                        message: 'Min length 6'
-                                    },
-                                    maxLength: {
-                                        value: 30,
-                                        message: 'Max length 30'
-                                    }
-                                })
-                                } />
+                            <div className='relative w-full'>
+                                <input type={showRegisterPass ? 'text' : 'password'} placeholder="Password"
+                                    {
+                                    ...registerRegister('passwordRegister', {
+                                        required: {
+                                            value: true,
+                                            message: 'Password is required'
+                                        },
+                                        minLength: {
+                                            value: 6,
+                                            message: 'Min length 6'
+                                        },
+                                        maxLength: {
+                                            value: 30,
+                                            message: 'Max length 30'
+                                        }
+                                    })
+                                    } />
+                                <div className='absolute top-5 right-3'>
+
+                                    <button type='button' onClick={() => setShowRegisterPass(prevState => !prevState)}>
+                                        {showRegisterPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+                                    </button>
+
+                                </div>
+                            </div>
                             {
                                 errorsRegister.passwordRegister && <span className='text-red-400'>{errorsRegister.passwordRegister?.message}</span>
                             }
-                            <input type="password" placeholder="Confirm Password"
+                            <input type={showRegisterPass ? 'text' : 'password'} placeholder="Confirm Password"
                                 {
                                 ...registerRegister('confPasswordRegister', {
                                     validate: (value) => {
@@ -184,15 +194,27 @@ export default function Login() {
                             {
                                 errorsLogin.emailLogin && <span className='text-red-400'>{errorsLogin.emailLogin?.message}</span>
                             }
-                            <input className='bg-[#eee] my-[8px] py-[12px] px-[15px]' type="text" placeholder="Password"
-                                {
-                                ...registerLogin('passwordLogin', {
-                                    required: {
-                                        value: true,
-                                        message: 'Password is required'
+                            <div className='relative'>
+                                <input className=' bg-[#eee] my-[8px] py-[12px] px-[15px]'
+                                    type={showLoginPass ? 'text' : 'password'}
+                                    placeholder="Password"
+                                    {
+                                    ...registerLogin('passwordLogin', {
+                                        required: {
+                                            value: true,
+                                            message: 'Password is required'
+                                        }
+                                    })
                                     }
-                                })
-                                } />
+                                />
+                                <div className='absolute top-5 right-3'>
+
+                                    <button type='button' onClick={() => setShowLoginPass(prevState => !prevState)}>
+                                        {showLoginPass ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+                                    </button>
+
+                                </div>
+                            </div>
                             {
                                 errorsLogin.passwordLogin && <span className='text-red-400'>{errorsLogin.passwordLogin?.message}</span>
                             }
