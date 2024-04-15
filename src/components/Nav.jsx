@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNav } from '../features/nav/navSlice'
 import { setMobile, stateMobile } from "../features/mobile/mobileSlice"
+import { setUserDetails } from '../features/user/userSlice'
 
 
 
@@ -23,6 +24,7 @@ export default function Navbar() {
 
         const dataResponse = await fetchData.json()
         if (dataResponse.success) {
+            dispatch(setUserDetails(null))
             navigate('/')
             window.location.reload()
         }
@@ -43,7 +45,7 @@ export default function Navbar() {
 
     return <>
         <section>
-            <nav className={isScroll ? ' bg-gradient-to-r from-violet-700 to-violet-900 shadow-lg shadow-violet-500/50 transition' : 'shadow-lg shadow-violet-500/50 transition'} style={{
+            <nav className={isScroll ? 'bg-gradient-to-r from-violet-700 to-violet-900 shadow-lg shadow-violet-500/50 transition' : 'shadow-lg shadow-violet-500/50 transition'} style={{
                 display: 'flex',
                 position: 'fixed',
                 justifyContent: 'space-around',
@@ -71,10 +73,28 @@ export default function Navbar() {
                                 Home
                             </NavLink>
                         </button>
-                        <button className='my-9 text-white text-xl md:mx-4 md:my-0'>
+                        <button className='relative group my-9 text-white text-xl md:mx-4 md:my-0'>
                             <NavLink to='/products' className={({ isActive }) => isActive ? "underline" : ""}>
                                 Products
                             </NavLink>
+                            <div style={{background: 'rgba(55, 55, 55, 0.99)'}} className='absolute shadow-2xl rounded-md bg-white h-fit px-8 py-4 hidden md:group-hover:block'>
+                                <nav className='transition duration-1000'>
+                                    <ul>
+                                        <li className='py-2'>
+                                            <NavLink to='/products' className='whitespace-nowrap text-purple-600 hover:text-purple-800'>Monitores</NavLink>
+                                        </li>
+                                        <li className='py-2'>
+                                            <NavLink className='whitespace-nowrap text-purple-600  hover:text-purple-800'>PC Armadas</NavLink>
+                                        </li>
+                                        <li className='py-2'>
+                                            <NavLink className='whitespace-nowrap text-purple-600  hover:text-purple-800'>Perifericos</NavLink>
+                                        </li>
+                                        <li className='py-2'>
+                                            <NavLink className='whitespace-nowrap text-purple-600  hover:text-purple-800'>Laptops</NavLink>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </button>
                         <button className='my-9 text-white text-xl md:mx-4 md:my-0'>
                             <NavLink to='/contact' className={({ isActive }) => 

@@ -6,9 +6,10 @@ import Contact from "./Pages/Contact"
 import Product from "./Pages/Product"
 import Login from "./Pages/Login"
 import Context from "./context"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setUserDetails } from "./features/user/userSlice"
 function App() {
+  const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
   const fetchUserDetails = async () => {
     const dataResponse = await fetch('http://localhost:3000/user-details', {
@@ -26,7 +27,6 @@ function App() {
     /*User <details></details>*/
     fetchUserDetails()
   }, [])
-
   return (
     <>
       <Context.Provider value={{
