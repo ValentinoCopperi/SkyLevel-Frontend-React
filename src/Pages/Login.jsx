@@ -28,6 +28,7 @@ export default function Login() {
         watch
     } = useForm({
         defaultValues: {
+            name : '',
             emailRegister: '',
             passwordRegister: '',
             confPasswordRegister: ''
@@ -78,6 +79,7 @@ export default function Login() {
 
     const handleRegister = handleRegisterSubmit((data) => {
         const datos = {
+            name : data.name,
             user: data.emailRegister,
             password: data.passwordRegister
         }
@@ -105,6 +107,27 @@ export default function Login() {
                                 <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
                             </div>
                             <span>or use your email for registration</span>
+                            <input type="text" placeholder="Name"
+                                {
+                                ...registerRegister('name', {
+                                    required: {
+                                        value: true,
+                                        message: 'Name must be provided'
+                                    },
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Min length 6'
+                                    },
+                                    maxLength: {
+                                        value: 30,
+                                        message: 'Max length 30'
+                                    }
+
+                                })
+                                } />
+                            {
+                                errorsRegister.name && <span className='text-red-400'>{errorsRegister.name?.message}</span>
+                            }
                             <input type="email" placeholder="Email"
                                 {
                                 ...registerRegister('emailRegister', {

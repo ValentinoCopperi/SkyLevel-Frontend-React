@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react"
-import { Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 import Home from "./Pages/Home"
 import Products from "./Pages/Products"
 import Contact from "./Pages/Contact"
 import Product from "./Pages/Product"
 import Login from "./Pages/Login"
+import PanelAdmin from "./Pages/PanelAdmin"
 import Context from "./context"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserDetails } from "./features/user/userSlice"
+import { useNavigate } from "react-router-dom"
+import AdminProducts from "./components/AdminProducts"
+import AllUsers from "./components/AllUsers"
 function App() {
+  const navigate = useNavigate()
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
   const fetchUserDetails = async () => {
@@ -19,10 +24,12 @@ function App() {
 
     const dataApi = await dataResponse.json()
 
-    if(dataApi.success){
+    if (dataApi.success) {
       dispatch(setUserDetails(dataApi.data))
     }
   }
+
+
   useEffect(() => {
     /*User <details></details>*/
     fetchUserDetails()
@@ -40,6 +47,11 @@ function App() {
             <Route path="/products/:id" element={<Product></Product>}></Route>
             <Route path="/contact" element={<Contact ></Contact>}></Route>
             <Route path="/login" element={<Login ></Login>}></Route>
+            <Route path="/panel-admin" element={user?.id === 115 ? <PanelAdmin /> : <Home></Home>}>
+              <Route index element={<AllUsers />}></Route>
+              <Route path="all-users" element={<AllUsers />} />
+              <Route path="product" element={<AdminProducts />} />
+            </Route>
           </Routes>
         </div>
       </Context.Provider>
