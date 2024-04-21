@@ -10,8 +10,8 @@ import Context from "./context"
 import { useDispatch, useSelector } from "react-redux"
 import { setUserDetails } from "./features/user/userSlice"
 import { useNavigate } from "react-router-dom"
-import AdminProducts from "./components/AdminProducts"
 import AllUsers from "./components/AllUsers"
+
 function App() {
   const navigate = useNavigate()
   const user = useSelector(state => state?.user?.user)
@@ -50,7 +50,7 @@ function App() {
             <Route path="/panel-admin" element={user?.id === 115 ? <PanelAdmin /> : <Home></Home>}>
               <Route index element={<AllUsers />}></Route>
               <Route path="all-users" element={<AllUsers />} />
-              <Route path="product" element={<AdminProducts />} />
+              <Route path="product" element={<AllUsers />} />
             </Route>
           </Routes>
         </div>

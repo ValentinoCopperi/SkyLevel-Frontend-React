@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { appearNavRedux, hiddeNav, stateNav } from '../features/nav/navSlice'
 
 import Footer from '../components/Footer'
-
+import { Accordion, AccordionItem } from "@nextui-org/react";
 export default function Home() {
 
   const stateNavNow = useSelector(stateNav)
   const dispatch = useDispatch()
-
 
   return (
     <section>
@@ -22,7 +21,7 @@ export default function Home() {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'
         }} className='min-h-[25vh] lg:min-h-[50vh]'>
-          <div className='text-center text-left pt-10 md:pt-5 lg:pt-20 xl:pt-[10%]'>
+          <div className='text-center pt-10 md:pt-5 lg:pt-20 xl:pt-[10%]'>
             <h1 className='text-xl font-black'>Servicio de contacto de SkyLevel</h1>
             <h5 className='underline'>¿Como podemos ayudar?</h5>
           </div>
@@ -69,6 +68,7 @@ export default function Home() {
               className='w-1/3 m-1 p-5 h-[120px] flex flex-col items-center justify-center lg:h-[160px] lg:m-2 '>
               <h1 className='text-center font-black lg:text-2xl'>Seguridad</h1>
               <i className="fa-solid fa-shield-halved lg:text-3xl"></i>
+
             </div>
             <div style={{
               border: '1px solid rgba(166,166,166,0.57)',
@@ -84,7 +84,7 @@ export default function Home() {
 
         <section>
 
-          <div style={{background:'#d1d1d1'}}
+          <div style={{ background: '#d1d1d1' }}
             className='py-10 lg:flex lg:justify-evenly'
           >
             <div className='max-[600px]:w-[80%] m-auto bg-white lg:w-[50%] lg:m-0'>
@@ -129,6 +129,33 @@ export default function Home() {
             </div>
           </div>
 
+        </section>
+
+        <section>
+          <div>
+            <div className='bg-white py-5'>
+              <h1 className='text-center py-3 text-2xl font-semibold'>Preguntas Frencuentes</h1>
+              <div className='w-1/2 mx-auto'>
+              <Accordion className='text-black font-semibold'>
+                <AccordionItem key="1" aria-label="Accordion 1" title="Quienes somos?">
+                  <h1 className='font-normal'>
+                  Sky-Level es una empresa líder en tarjetas madre, tarjetas gráficas, laptops, hardware de juegos y sistemas de alto rendimiento. ¡Nos apasiona unirnos a los jugadores para desafiar los límites sin miedo y luchar mientras nos elevamos a la gloria máxima!
+                  </h1>
+                </AccordionItem>
+                <AccordionItem key="2" aria-label="Accordion 2" title="Donde ubicarnos?">
+                  <h1 className='font-normal'>
+                    Podes ubicarnos en nuestas sucursales ubicadas en 121 Rock Street, 21 Avenue o Nueva York, NY 92103-9000
+                  </h1>
+                </AccordionItem>
+                <AccordionItem key="3" aria-label="Accordion 3" title="Como comunicarse?">
+                  <h1 className='font-normal'>
+                   Podes completar el formulario de la parte superior , <br/> o llamar al +42 4242 523 o +42 4241 341
+                  </h1>
+                </AccordionItem>
+              </Accordion>
+              </div>
+            </div>
+          </div>
         </section>
       </section>
       <Footer></Footer>

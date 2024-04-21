@@ -27,6 +27,16 @@ export default function PanelAdmin() {
                                Admin Products
                             </NavLink>
                         </button>
+                        <button className=' px-2 py-1 hover:bg-slate-100 hover:text-black'>
+                            <NavLink to='product' style={{width:'100%'}} className={({ isActive }) => isActive ? "underline" : ""}>
+                              Admin Brands
+                            </NavLink>
+                        </button>
+                        <button className=' px-2 py-1 hover:bg-slate-100 hover:text-black'>
+                            <NavLink to='product' style={{width:'100%'}} className={({ isActive }) => isActive ? "underline" : ""}>
+                               Admin Categories
+                            </NavLink>
+                        </button>
                         
                     </nav>
                 </div>

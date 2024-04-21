@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import {useSelector  , useDispatch} from 'react-redux'
 
 import Navbar from '../components/Nav'
@@ -11,8 +11,12 @@ import animationData from '../../public/home-animate.json';
 
 import {  stateNav} from '../features/nav/navSlice'
 import {stateMobile } from "../features/mobile/mobileSlice"
-    
+
+
+
+
 export default function Home() {
+
   const stateNavNow = useSelector(stateNav)
   const stateMobileNow = useSelector(stateMobile)
   const dispatch = useDispatch()
@@ -25,10 +29,8 @@ export default function Home() {
       preserveAspectRatio: "xMidYMid slice"
     }
   };
-  const [fixHome, setFixHome] = useState(() => {
-    if (window.innerWidth < 500) return true;
-    return false;
-  })
+
+
 
   return (
     <div className='h-full'>
@@ -42,7 +44,9 @@ export default function Home() {
               textShadow: '   0 0 2px blueviolet, 0 0 10px blueviolet, 0 0 20px blueviolet, 0 0 40px blueviolet',
               textAlign: 'center',
               fontFamily:'serif'
-            }} className='text-5xl text-7xl'>Sky-Level</h1>
+            }} className='text-5xl'>Sky-Level</h1>
+            <h5 className='text-white'>
+            </h5>
             <h5 style={{
               color: 'pink',
               border: '1px solid pink',
@@ -59,7 +63,7 @@ export default function Home() {
           <div>
             <Lottie
               options={defaultOptions}
-              className='w-1/2 lg: w-1/4'
+              className='w-1/2 lg:w-1/4'
             />
           </div>
         </div>
