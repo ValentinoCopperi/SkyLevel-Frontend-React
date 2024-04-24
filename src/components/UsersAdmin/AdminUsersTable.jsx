@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import DeleteModal from './DeleteModal'
-import deleteUser from "../../utils/deleteUser";
-import CreateUserModal from './CreateUserModal';
+import DeleteModal from './modals/DeleteModal'
+import deleteUser from "../../../utils/deleteUser";
+import CreateUserModal from './modals/CreateUserModal';
 // FLOAT IU
 export default function AdminUsersTable({ users }) {
   const [searchTerm, setSearchTerm] = useState("")
@@ -34,11 +34,11 @@ export default function AdminUsersTable({ users }) {
 
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
-          <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
+          <h3 className="text-cyan-100 text-xl font-bold sm:text-2xl">
             Team members
           </h3>
-          <p className="text-gray-600 mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          <p className="text-white mt-2">
+            Admin our registered user in the database
           </p>
         </div>
         <div className="mt-3 md:mt-0">

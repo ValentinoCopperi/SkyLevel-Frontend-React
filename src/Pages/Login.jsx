@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Context from '../context'
 import { useForm } from 'react-hook-form'
-
+import registerUser from '../../utils/registerUser'
 export default function Login() {
     const { fetchUserDetails } = useContext(Context)
 
@@ -76,23 +76,24 @@ export default function Login() {
             })
     })
 
-
     const handleRegister = handleRegisterSubmit((data) => {
         const datos = {
-            name : data.name,
+            name: data.name,
             user: data.emailRegister,
             password: data.passwordRegister
         }
-        axios.post('http://localhost:3000/register', datos)
-            .then(res => {
-                if (res.data.Error) {
-                    console.log(res.data.Error)
-                    setErrorDatos(res.data.Error)
+        registerUser(datos)
+            .then((res) => {
+                if (res.error == true) {
+                    setErrorDatos(res.message)
                     return
                 }
-                setErrorDatos(res.data.Status)
+                setErrorDatos(res.message)
             })
+            
+
     })
+   
     return (
         <section style={{ background: 'linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(71, 30, 84) 119.9%)' }}>
             <Navbar></Navbar>

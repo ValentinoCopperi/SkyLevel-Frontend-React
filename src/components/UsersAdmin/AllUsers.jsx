@@ -26,7 +26,6 @@ export default function AllUsers() {
 
     return (
         <div className='text-white w-[90%] mx-auto p-5'>
-            <h1 className='text-2xl'>Users:</h1>
            
             <div className='flex flex-wrap w-full'>
                 {

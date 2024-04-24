@@ -1,15 +1,44 @@
 import React from 'react'
 import Navbar from '../components/Nav'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { appearNavRedux, hiddeNav, stateNav } from '../features/nav/navSlice'
-
+import { motion, AnimatePresence } from 'framer-motion'
 import Footer from '../components/Footer'
 import { Accordion, AccordionItem } from "@nextui-org/react";
 export default function Home() {
 
   const stateNavNow = useSelector(stateNav)
   const dispatch = useDispatch()
+  const [selectedId, setSelectedId] = useState(null)
+  const [ubicacion, setUbicacion] = useState(null)
 
+  const handleUbicacion = (id) => {
+    setUbicacion(ubicaciones.find((ubi) => ubi.id = id))
+  }
+
+  const ubicaciones = [
+    {
+      id: 1,
+      title: '121 Rock Street, 21 Avenue',
+      map: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d72442.40679467558!2d-80.15134811573984!3d25.750783027075727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1713939647420!5m2!1ses!2sar"
+    },
+    {
+      id: 2,
+      title: 'Nueva York, NY 92103-9000',
+      map: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d72442.40679467558!2d-80.15134811573984!3d25.750783027075727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1713939647420!5m2!1ses!2sar"
+    },
+    {
+      id: 3,
+      title: 'Nueva York, NY 446-1000',
+      map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d273937.56162801915!2d-73.97800271078036!3d40.660503382256636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNueva%20York%2C%20EE.%20UU.!5e0!3m2!1ses!2sar!4v1713842939640!5m2!1ses!2sar'
+    },
+    {
+      id: 4,
+      title: '104 ST Breckmon',
+      map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.0361329033!2d-74.30933820251501!3d40.69753995243349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNueva%20York%2C%20EE.%20UU.!5e0!3m2!1ses!2sar!4v1713842812026!5m2!1ses!2sar'
+    }
+  ]
   return (
     <section>
       <Navbar ></Navbar>
@@ -136,24 +165,69 @@ export default function Home() {
             <div className='bg-white py-5'>
               <h1 className='text-center py-3 text-2xl font-semibold'>Preguntas Frencuentes</h1>
               <div className='w-1/2 mx-auto'>
-              <Accordion className='text-black font-semibold'>
-                <AccordionItem key="1" aria-label="Accordion 1" title="Quienes somos?">
-                  <h1 className='font-normal'>
-                  Sky-Level es una empresa líder en tarjetas madre, tarjetas gráficas, laptops, hardware de juegos y sistemas de alto rendimiento. ¡Nos apasiona unirnos a los jugadores para desafiar los límites sin miedo y luchar mientras nos elevamos a la gloria máxima!
-                  </h1>
-                </AccordionItem>
-                <AccordionItem key="2" aria-label="Accordion 2" title="Donde ubicarnos?">
-                  <h1 className='font-normal'>
-                    Podes ubicarnos en nuestas sucursales ubicadas en 121 Rock Street, 21 Avenue o Nueva York, NY 92103-9000
-                  </h1>
-                </AccordionItem>
-                <AccordionItem key="3" aria-label="Accordion 3" title="Como comunicarse?">
-                  <h1 className='font-normal'>
-                   Podes completar el formulario de la parte superior , <br/> o llamar al +42 4242 523 o +42 4241 341
-                  </h1>
-                </AccordionItem>
-              </Accordion>
+                <Accordion className='text-black font-semibold'>
+                  <AccordionItem key="1" aria-label="Accordion 1" title="Quienes somos?" className='p-2 rounded-xl' style={{ background: 'rgba(128, 128, 128, 0.2)' }}>
+                    <h1 className='font-normal'>
+                      Sky-Level es una empresa líder en tarjetas madre, tarjetas gráficas, laptops, hardware de juegos y sistemas de alto rendimiento. ¡Nos apasiona unirnos a los jugadores para desafiar los límites sin miedo y luchar mientras nos elevamos a la gloria máxima!
+                    </h1>
+                  </AccordionItem>
+                  <AccordionItem key="2" aria-label="Accordion 2" title="Donde ubicarnos?" className='my-4 p-2 rounded-xl' style={{ background: 'rgba(128, 128, 128, 0.2)' }}>
+                    <h1 className='font-normal'>
+                      Podes ubicarnos en nuestas sucursales ubicadas en 121 Rock Street, 21 Avenue o Nueva York, NY 92103-9000
+                    </h1>
+                  </AccordionItem>
+                  <AccordionItem key="3" aria-label="Accordion 3" title="Como comunicarse?" className='p-2 rounded-xl' style={{ background: 'rgba(128, 128, 128, 0.2)' }}>
+                    <h1 className='font-normal'>
+                      Podes completar el formulario de la parte superior , <br /> o llamar al +42 4242 523 o +42 4241 341
+                    </h1>
+                  </AccordionItem>
+                </Accordion>
               </div>
+            </div>
+          </div>
+          <div className='bg-white relative pb-10'>
+            <h1 className='text-center py-3 text-2xl font-semibold'>Ubicaciones:</h1>
+            <div className='flex w-[90%]  mx-auto'>
+              {ubicaciones.map(item => (
+                <motion.div style={{
+                  border: '1px solid rgba(166,166,166,0.57)',
+                  boxShadow: ' 0px 1px 12px 2px rgba(71,71,71,1)',
+                  background: 'rgba(128, 128, 128, 0.2)'
+                }} key={item.id} className='cursor-pointer bg-gray-500 flex flex-col items-center justify-center w-[20%] mx-5 p-2 rounded-md ' layoutId={item.id} onClick={() => {
+                  setSelectedId(item.id)
+                  handleUbicacion(item.id)
+                }}>
+                  <motion.h2>{item.title}</motion.h2>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className='w-[90%] mx-auto py-9'>
+
+              <AnimatePresence>
+                {selectedId && (
+                  <motion.div layoutId={selectedId}>
+
+                    <div className='h-[60vh]' style={{
+                       border: '1px solid rgba(166,166,166,0.57)',
+                       boxShadow: ' 0px 1px 12px 2px rgba(71,71,71,1)',
+                    }}>
+                    {
+                      ubicacion && <iframe src={ubicacion.map} className='w-[100%] h-[100%]'  loading="lazy" ></iframe>
+                    }
+                    </div>
+
+                    <motion.button className='bg-neutral-500 text-white p-4 rounded-b-xl' onClick={() => {
+                      setSelectedId(null)
+                      setUbicacion(null)
+                    }}>
+                      BORRAR
+                    </motion.button>
+
+
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </section>

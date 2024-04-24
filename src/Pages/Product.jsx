@@ -3,13 +3,22 @@ import { useParams } from 'react-router-dom'
 import Navbar from '../components/Nav'
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import { motion, AnimatePresence } from 'framer-motion'
+import { addCart,removeCart } from '../features/cart/cartSlice'
 import ShowProducts from './../components/ShowProducts';
+import { ToastContainer , toast } from 'react-toastify'
 export default function Product() {
+  const user = useSelector(state => state?.user?.user)
+  const cart = useSelector(state => state?.cart?.cart)
+  const total = useSelector(state => state?.cart?.total)
+  const dispatch = useDispatch()
   let { id } = useParams()
+
   const [product, setProduct] = useState({})
   const [products, setProducts] = useState([])
   const [mainImage, setMainImage] = useState()
-  
+  const [noticeLogin,setNoticeLogin] = useState(null)
   useEffect(() => {
     function getProducts() {
       fetch('http://localhost:3000/productos')
@@ -38,9 +47,18 @@ export default function Product() {
       return prod.categoria == product.categoria || prod.marca == product.marca
     }
   })
+
+  const handleAddCart = (prod) => {
+    dispatch(addCart(prod))
+    //showToastMessage(prod.producto)
+  }
+  const showToastMessage = (product) => {
+    toast(product +" agregado al carrito!")
+  }
   return (
     <section style={{ background: 'rgb(0,0,0) linear-gradient(170deg, rgba(0,0,0,1) 24%, rgba(78,0,103,1) 95%)' }}>
       <Navbar></Navbar>
+      <ToastContainer className='fixed top-0 right-0 bg-white p-10'/>
       {/* CONTENEDOR PRODUCTO SELECCIONADO + PRODUCTOS RELACIONADOS */}
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
@@ -54,8 +72,29 @@ export default function Product() {
             <div className='flex'>
               <h5 className='text-red-600 text-2xl'>${product.precio}.00</h5>
               <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1  hover:bg-orange-600 hover:text-orange-200'>
-                <Link>Comprar</Link>
+                <motion.div onClick={()=>{user ? handleAddCart(product) : setNoticeLogin(true)}}>
+                  Comprar
+                </motion.div>
               </h5>
+            </div>
+            <div>
+              <AnimatePresence>
+                {noticeLogin &&
+                  <div className='py-4'>
+                    <motion.div>
+                      <motion.h1 className='text-red-400 text-1xl'>
+                        You must be logged in to buy products!
+                      </motion.h1>
+                      <motion.button className='bg-orange-600 p-2 text-white rounded-lg'>
+                        <Link to='/login'>
+                          LOGIN
+                        </Link>
+                      </motion.button>
+                    </motion.div>
+                    
+                  </div>
+                }
+              </AnimatePresence>
             </div>
           </article>
           {/* IMAGENES PRODUCTO SELECCIONADO */}
@@ -85,7 +124,7 @@ export default function Product() {
                 {
                   relatedProducts.length ? 
                   relatedProducts.map((prod) => {
-                    return <article key={prod.id_producto} className=' w-[85%] m-3 cursor-pointer p-10 bg-[#202430]  hover:bg-black lg:w-1/3 lg:m-5' style={{boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}>
+                    return <article key={prod.id_producto} className=' w-[35%] m-3 cursor-pointer p-10 bg-[#18181a]  hover:bg-black lg:w-1/3 lg:m-5' style={{boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}>
                       <div className='h-full flex flex-col items-center justify-center'>
                         <img src={`/productos/${prod.imagen_1}.png`} alt="" className='w-[220px]' />
                         <h1 className='text-white'>{prod.producto}</h1>
@@ -95,7 +134,7 @@ export default function Product() {
                             <Link to={`/products/${prod.id_producto}`}>Descubre Mas</Link>
                           </h5>
                           <h5 className='text-zinc-500 border p-1 ml-4  hover:text-orange-400'>
-                            <Link>Comprar</Link>
+                            <button>Comprar</button>
                           </h5>
                         </div>
                       </div>
@@ -107,8 +146,8 @@ export default function Product() {
             </div>
         </section>
       </div>
-
       <Footer></Footer>
+    
     </section>
   )
 }

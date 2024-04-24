@@ -6,7 +6,7 @@ export default function ShowProducts({ products }) {
     return <h1 className='text-orange-600 text-2xl'>Productos no encontrados :& </h1>
   }else{
     return products.map((prod,index) => {
-      return <article key={prod.id_producto} className='cursor-pointer p-10 bg-[#202020] mx-auto my-5  md:m-8 hover:bg-black' style={{ boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}
+      return <article key={prod.id_producto} className='cursor-pointer p-10 rounded-xl mx-auto my-5  md:m-8 hover:bg-black' style={{ boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}
             onMouseOver={()=>setHoveredIndex(index)} onMouseOut={()=>setHoveredIndex(null)}
       >
         <div className='h-full flex flex-col items-center justify-center'>

@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import deleteUser from "../../utils/deleteUser";
+import deleteUser from "../../../../utils/deleteUser";
 import { useState } from "react";
 export default function DeleteModal( {prop , id , currentFunction}){
    

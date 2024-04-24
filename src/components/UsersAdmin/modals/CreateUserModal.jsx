@@ -1,8 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import deleteUser from "../../utils/deleteUser";
+import deleteUser from "../../../../utils/deleteUser";
 import { useState, useRef } from "react";
 import { useForm } from 'react-hook-form'
-
+import registerUser from "../../../../utils/registerUser";
 export default function CreateUserModal() {
     const {
         register: registerRegister,
@@ -21,6 +21,25 @@ export default function CreateUserModal() {
     refPassword.current = watch('passwordRegister', '')
 
     const [showRegisterPass, setShowRegisterPass] = useState(false)
+    const [advice, setAdvice] = useState(null)
+
+    const handleSubmit = handleRegisterSubmit((data) => {
+        const datos = {
+            name: data.name,
+            user: data.emailRegister,
+            password: data.passwordRegister
+        }
+        registerUser(datos)
+            .then((res) => {
+                if (res.error == true) {
+                    setAdvice(res.message)
+                    return
+                }
+                setAdvice(res.message)
+            })
+            
+
+    })
 
     return (
         <Dialog.Root>
@@ -30,21 +49,20 @@ export default function CreateUserModal() {
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 w-full h-full bg-black opacity-40" />
                 <Dialog.Content className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-4 w-full max-w-lg">
-                    <main className="w-full h-full mt-40 flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+                    <main className="w-full h-[70vh] mt-[15vh] mb-10 flex flex-col items-center justify-center sm:px-4">
                         <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
-                            <div className="text-center">
-                                <div className="mt-5 space-y-2">
-                                    <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Register a new account</h3>
-                                </div>
-                            </div>
+
                             <div className="bg-white shadow p-4 py-6 space-y-8 sm:p-6 sm:rounded-lg">
 
 
                                 <form
-                                    onSubmit={(e) => e.preventDefault()}
+                                    onSubmit={handleSubmit}
                                     className="space-y-5"
                                 >
                                     <div>
+                                        {
+                                            advice && <h5 className="text-red-500 text-1xl">{advice}</h5>
+                                        }
                                         <label className="font-medium">
                                             Name
                                         </label>
@@ -150,17 +168,7 @@ export default function CreateUserModal() {
                             </div>
 
                         </div>
-                        <div className="items-center gap-2 mt-3 text-sm sm:flex">
 
-                            <Dialog.Close asChild>
-                                <button
-                                    aria-label="Close"
-                                    className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md border ring-offset-2 ring-indigo-600 focus:ring-2"
-                                >
-                                    Cancel
-                                </button>
-                            </Dialog.Close>
-                        </div>
                     </main>
                 </Dialog.Content>
             </Dialog.Portal >
