@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {useSelector } from 'react-redux'
 import {  stateNav} from '../features/nav/navSlice'
 import { stateMobile } from '../features/mobile/mobileSlice'
- 
+
 
     
 export default function Footer() {
+ 
   const stateNavNow = useSelector(stateNav)
   const stateMobileNow = useSelector(stateMobile)
   return (

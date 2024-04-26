@@ -1,48 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/Nav'
 import Footer from '../components/Footer'
 import ShowProducts from '../components/ShowProducts';
 import FiltersOptions from '../components/FiltersOptions';
 import Carousel from '../components/BannerProductos';
-import 'animate.css';
-import { useSelector, useDispatch } from 'react-redux'
-import { appearNavRedux, hiddeNav, stateNav } from '../features/nav/navSlice'
-
+import { useSelector } from 'react-redux'
+import { stateNav } from '../features/nav/navSlice'
+import { ProductsContext } from './../context/ProductsContext';
 
 
 
 export default function Products() {
-
+  const {productos,showAll} = useContext(ProductsContext)
+  
   const stateNavNow = useSelector(stateNav)
-  const dispatch = useDispatch()
-
   const [helloFilter, setHelloFilter] = useState(false)
   const [inputValue, setInputValue] = useState('Buscar...')
-  const [productos, setProductos] = useState([])
   const [productosFiltrados, setProductosFiltrados] = useState([])
   const [categorias, setCategorias] = useState([])
   const [marcas, setMarcas] = useState([])
+
   const handleChange = (e) => {
     setInputValue(e.target.value)
   }
   useEffect(() => {
-    function getProducts() {
-      fetch('http://localhost:3000/productos')
-        .then(res => res.json())
-        .then(data => setProductos(data))
-    }
+   
     function getCategorias() {
       fetch('http://localhost:3000/categorias')
         .then(res => res.json())
-        .then(data => setCategorias(data))
+        .then(data => setCategorias(data.data))
     }
     function getMarcas() {
       fetch('http://localhost:3000/marcas')
         .then(res => res.json())
-        .then(data => setMarcas(data))
+        .then(data => setMarcas(data.data))
     }
 
-    getProducts()
     getCategorias()
     getMarcas()
   }, [])
@@ -91,7 +84,7 @@ export default function Products() {
             <div className=
               {`  
             ${helloFilter ? 'max-[1024px]:transform max-[1024px]:translate-0' : 'max-[1024px]:transform max-[1024px]:translate-x-full'}
-            z-20 overflow-hidden transition-transform duration-1000 ease-in-out w-full h-full fixed bg-black text-center top-0 right-0
+            max-[1024px]:overflow-y-auto z-20 overflow-hidden transition-transform duration-1000 ease-in-out w-full h-full fixed bg-black text-center top-0 right-0
             lg:transition-none lg:static lg:h-full lg:w-full lg:inset-0 lg:overflow-hidden lg:transform lg:translate-0 lg:bg-black lg:bg-[#3e3e3e] lg:border-r lg:border-white
           `}>
               <button onClick={() => setHelloFilter(false)} className='float-right m-4 lg:hidden'>
@@ -105,7 +98,7 @@ export default function Products() {
                     <i className="fa-solid fa-magnifying-glass fa-xl text-orange-600"></i>
                   </button>
                 </div>
-                <button onClick={deleteFilters} className='underline text-white mt-10'>
+                <button onClick={showAll} className='underline text-white mt-10'>
                   Ver Todos
                 </button>
               </div>

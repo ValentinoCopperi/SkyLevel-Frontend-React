@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Navbar from '../components/Nav'
 import Footer from '../components/Footer'
@@ -6,45 +6,33 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { motion, AnimatePresence } from 'framer-motion'
 import { addCart,removeCart } from '../features/cart/cartSlice'
-import ShowProducts from './../components/ShowProducts';
-import { ToastContainer , toast } from 'react-toastify'
-export default function Product() {
-  const user = useSelector(state => state?.user?.user)
-  const cart = useSelector(state => state?.cart?.cart)
-  const total = useSelector(state => state?.cart?.total)
-  const dispatch = useDispatch()
-  let { id } = useParams()
+import { ProductsContext } from '../context/ProductsContext'
 
-  const [product, setProduct] = useState({})
-  const [products, setProducts] = useState([])
+export default function Product() {
+  let { id } = useParams()
+  const {getProductById,productos} = useContext(ProductsContext)
+  const [producto,setProducto] = useState({})
   const [mainImage, setMainImage] = useState()
+
+  useEffect(()=>{
+    getProductById(id).then(producto =>{
+      setProducto(producto)
+     setMainImage(producto.imagen_1)})
+  },[id])
+
+  const user = useSelector(state => state?.user?.user)
+  const dispatch = useDispatch()
   const [noticeLogin,setNoticeLogin] = useState(null)
-  useEffect(() => {
-    function getProducts() {
-      fetch('http://localhost:3000/productos')
-        .then(res => res.json())
-        .then(data => setProducts(data))
-    }
-    const getProduct = () => {
-      fetch(`http://localhost:3000/productos/${id}`)
-        .then(res => res.json())
-        .then(data => {
-          setProduct(data[0])
-          setMainImage(data[0].imagen_1)
-        })
-    }
-    getProducts()
-    getProduct()
-  }, [id])
+  
   
   const handleMainImage = (e) => {
 
     setMainImage(e.target.parentElement.value)
   }
 
-  const relatedProducts = products.filter((prod)=>{
+  const relatedProducts = productos.filter((prod)=>{
     if(prod.id_producto != id){
-      return prod.categoria == product.categoria || prod.marca == product.marca
+      return prod.categoria == producto.categoria || prod.marca == producto.marca
     }
   })
 
@@ -52,13 +40,10 @@ export default function Product() {
     dispatch(addCart(prod))
     //showToastMessage(prod.producto)
   }
-  const showToastMessage = (product) => {
-    toast(product +" agregado al carrito!")
-  }
+  
   return (
     <section style={{ background: 'rgb(0,0,0) linear-gradient(170deg, rgba(0,0,0,1) 24%, rgba(78,0,103,1) 95%)' }}>
       <Navbar></Navbar>
-      <ToastContainer className='fixed top-0 right-0 bg-white p-10'/>
       {/* CONTENEDOR PRODUCTO SELECCIONADO + PRODUCTOS RELACIONADOS */}
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
@@ -67,12 +52,12 @@ export default function Product() {
           {/* DATOS PRODUCTO SELECCIONADO */}
           <article className='max-[700px]:py-2
           py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>
-            <h1 className='text-orange-400 text-3xl'>{product.producto}</h1>
-            <p className='my-5'>{product.datos}</p>
+            <h1 className='text-orange-400 text-3xl'>{producto.producto}</h1>
+            <p className='my-5'>{producto.datos}</p>
             <div className='flex'>
-              <h5 className='text-red-600 text-2xl'>${product.precio}.00</h5>
-              <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1  hover:bg-orange-600 hover:text-orange-200'>
-                <motion.div onClick={()=>{user ? handleAddCart(product) : setNoticeLogin(true)}}>
+              <h5 className='text-red-600 text-2xl'>${producto.precio}.00</h5>
+              <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1 cursor-pointer  hover:bg-orange-600 hover:text-orange-200'>
+                <motion.div onClick={()=>{user ? handleAddCart(producto) : setNoticeLogin(true)}}>
                   Comprar
                 </motion.div>
               </h5>
@@ -103,14 +88,14 @@ export default function Product() {
             <img src={`/productos/${mainImage}.png`} alt="" className='w-[90%] lg:w-1/2' />
             <div className='flex flex-row w-[96%]
               lg:flex lg:flex-col lg:w-1/3 '>
-              <button className='border border-white mx-auto w-1/3' value={product.imagen_1} onClick={handleMainImage}>
-                <img src={`/productos/${product.imagen_1}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.imagen_1} onClick={handleMainImage}>
+                <img src={`/productos/${producto.imagen_1}.png`} alt="" />
               </button>
-              <button className='border border-white mx-auto w-1/3' value={product.imagen_2} onClick={handleMainImage}>
-                <img src={`/productos/${product.imagen_2}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.imagen_2} onClick={handleMainImage}>
+                <img src={`/productos/${producto.imagen_2}.png`} alt="" />
               </button>
-              <button className='border border-white mx-auto w-1/3' value={product.imagen_3} onClick={handleMainImage}>
-                <img src={`/productos/${product.imagen_3}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.imagen_3} onClick={handleMainImage}>
+                <img src={`/productos/${producto.imagen_3}.png`} alt="" />
               </button>
             </div>
           </article>
@@ -141,7 +126,7 @@ export default function Product() {
                 
                     </article>
                     })
-                  : <h5 className='text-white'>No Hay Productos Relacionados a {product.producto}</h5>
+                  : <h5 className='text-white'>No Hay Productos Relacionados a {producto.producto}</h5>
                 }
             </div>
         </section>

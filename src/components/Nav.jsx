@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNav } from '../features/nav/navSlice'
-import { setMobile, stateMobile } from "../features/mobile/mobileSlice"
 import { setUserDetails } from '../features/user/userSlice'
-import { useCart } from '../context/cart'
-import { ToastContainer, toast } from 'react-toastify';
 import { removeCart } from '../features/cart/cartSlice'
 
 
