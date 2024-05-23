@@ -45,7 +45,7 @@ export default function Home() {
       <section style={{ background: 'black' }}
         className={stateNavNow ? 'hidden' : 'bg-black pt-[14vh] md:pt-[10.5vh] lg:pt-[11vh] xl:pt-[7.5vh]'}>
         <div style={{
-          backgroundImage: 'url(img/bg-contacto.png)',
+          backgroundImage: 'url(/img/bg-contacto.png)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'

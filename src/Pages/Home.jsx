@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div className='h-full'>
       <Navbar  ></Navbar>
-      <video className={'fixed  w-full h-screen top-0'} style={{ objectFit: 'cover', zIndex: '-5' }} src="../../public/bg-home.mp4" autoPlay loop muted></video>
+      <video className={'fixed  w-full h-screen top-0'} style={{ objectFit: 'cover', zIndex: '-5' }} src="/bg-home.mp4" autoPlay loop muted></video>
       <section className={stateNavNow ? 'hidden' : ''}>
         <div className='flex flex-col-reverse items-center w-auto md:flex-row md:justify-evenly md:items-center' style={{ paddingTop: '25vh' }}>
           <div className='flex flex-col items-center max-[500px]:py-[50px]'>
@@ -89,7 +89,7 @@ export default function Home() {
           </div>
           <div>
             <div className='flex flex-col-reverse my-4  items-center lg:flex-row lg:justify-evenly lg:items-center'>
-              <img src="/public/img/pexels-ron-lach-7859350.jpg" alt="" style={{ boxShadow: '1px 1px 8px violet' }} className='w-2/4 h-auto md:w-1/5 md:h-auto'/>
+              <img src="/img/pexels-ron-lach-7859350.jpg" alt="" style={{ boxShadow: '1px 1px 8px violet' }} className='w-2/4 h-auto md:w-1/5 md:h-auto'/>
               <div className='max-[500px]:flex max-[500px]:flex-col max-[500px]:items-center'>
                 <h1  className='text-purple-500 text-2xl text-center lg:text-7xl md:text-left'>ULTIMA GENERACION</h1>
                 <p className='text-white py-[60px] text-center w-3/4 md:text-left md:w-full'>Te invitamos a que experimentes mundos exóticos en los que tu misión es encontrar la solución</p>
@@ -121,7 +121,7 @@ export default function Home() {
 
           <div className='mt-[100px]'>
             <div className='flex flex-col-reverse  items-center lg:flex lg:flex-row-reverse lg:justify-evenly lg:items-center'>
-              <img src="/public/img/pexels-cottonbro-studio-4009599.jpg" alt="" style={{ boxShadow: '1px 1px 8px violet' }} className='w-2/4 h-auto md:w-1/5 md:h-auto'/>
+              <img src="/img/pexels-cottonbro-studio-4009599.jpg" alt="" style={{ boxShadow: '1px 1px 8px violet' }} className='w-2/4 h-auto md:w-1/5 md:h-auto'/>
               <div className='max-[500px]:flex max-[500px]:flex-col max-[500px]:items-center'>
                 <h1  className='text-purple-500 text-2xl text-center lg:text-7xl md:text-left'>ULTIMA GENERACION</h1>
                 <p className='text-white py-[60px] text-center w-3/4 md:text-left md:w-full'>Te invitamos a que experimentes mundos exóticos en los que tu misión es encontrar la solución</p>
@@ -170,7 +170,7 @@ export default function Home() {
           </div>
 
           <div style={{
-            backgroundImage:'url(img/bg-home-end.png)',
+            backgroundImage:'url(/img/bg-home-end.png)',
             backgroundPosition:'left',
             backgroundRepeat:'no-repeat',
             backgroundSize:'cover'

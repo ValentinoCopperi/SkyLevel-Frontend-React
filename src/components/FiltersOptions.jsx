@@ -89,9 +89,10 @@ export default function FiltersOptions({ marcas, categorias, setFilter }) {
                         name="maxPrice" 
                         id="maxPrice" 
                         min={0}
-                        max={800}
+                        max={1000}
                         step={5}
-                        defaultValue={800}
+                        defaultValue={maxPrice}
+                        value={maxPrice}
                         onChange={(e)=>handleMaxPrice(Number(e.target.value))}
                         />
                         <p className='text-center text-white'>Top price ${maxPrice}</p>

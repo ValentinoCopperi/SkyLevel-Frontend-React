@@ -5,15 +5,14 @@ import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { motion, AnimatePresence } from 'framer-motion'
-import { addCart,removeCart } from '../features/cart/cartSlice'
 import { ProductsContext } from '../context/ProductsContext'
-
+import { useCart } from '../context/CartContext'
 export default function Product() {
   let { id } = useParams()
   const {getProductById,productos} = useContext(ProductsContext)
+  const {addCart} = useCart()
   const [producto,setProducto] = useState({})
   const [mainImage, setMainImage] = useState()
-
   useEffect(()=>{
     getProductById(id).then(producto =>{
       setProducto(producto)
@@ -36,10 +35,7 @@ export default function Product() {
     }
   })
 
-  const handleAddCart = (prod) => {
-    dispatch(addCart(prod))
-    //showToastMessage(prod.producto)
-  }
+  
   
   return (
     <section style={{ background: 'rgb(0,0,0) linear-gradient(170deg, rgba(0,0,0,1) 24%, rgba(78,0,103,1) 95%)' }}>
@@ -57,7 +53,7 @@ export default function Product() {
             <div className='flex'>
               <h5 className='text-red-600 text-2xl'>${producto.precio}.00</h5>
               <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1 cursor-pointer  hover:bg-orange-600 hover:text-orange-200'>
-                <motion.div onClick={()=>{user ? handleAddCart(producto) : setNoticeLogin(true)}}>
+                <motion.div onClick={()=>{user ?  addCart(producto) : setNoticeLogin(true)}}>
                   Comprar
                 </motion.div>
               </h5>

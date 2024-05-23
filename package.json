@@ -3,14 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/ValentinoCopperi/SkyLevel-Frontend-React",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "watch": "vite build --watch",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages build"
   },
   "dependencies": {
+    "@ark-ui/react": "^2.2.3",
     "@formkit/auto-animate": "^0.8.1",
     "@nextui-org/button": "^2.0.30",
     "@nextui-org/react": "^2.3.6",
@@ -21,6 +25,7 @@
     "chart.js": "^4.4.2",
     "clsx": "^2.1.0",
     "framer-motion": "^11.1.7",
+    "gh-pages": "^6.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -36,6 +41,7 @@
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
+    "@park-ui/panda-preset": "^0.37.0",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",

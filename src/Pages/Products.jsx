@@ -11,7 +11,7 @@ import { ProductsContext } from './../context/ProductsContext';
 
 
 export default function Products() {
-  const {productos,showAll} = useContext(ProductsContext)
+  const {productos,showAll,worldFilter,searchWorld} = useContext(ProductsContext)
   
   const stateNavNow = useSelector(stateNav)
   const [helloFilter, setHelloFilter] = useState(false)
@@ -57,6 +57,8 @@ export default function Products() {
     setProductosFiltrados(productos)
   }
 
+ 
+
   
   return (
     <div>
@@ -64,7 +66,7 @@ export default function Products() {
       <section className={`${stateNavNow ? 'hidden' : ''} h-auto bg-black`}>
         
         {/* PRODUCTOS HEADER */}
-        <section className='grid content-center text-center  h-auto' style={{ paddingTop: '90px', backgroundAttachment: 'fixed', backgroundImage: 'url(img/bg-contact.png)', backgroundPosition: 'center', backgroundSize: 'cover', width: '100%', height: '100vh' }}>
+        <section className=' grid content-center text-center  h-auto' style={{ paddingTop: '90px', backgroundAttachment: 'fixed', backgroundImage: 'url(/img/bg-contact.png)', backgroundPosition: 'center', backgroundSize: 'cover', width: '100%', height: '100vh' }}>
           <h1 className='text-4xl text-white font-bold md:text-7xl'>EXPLORAR PRODUCTOS</h1>
           <i className="fa-solid fa-arrow-down fa-2xl" style={{ color: 'violet', textAlign: 'center', paddingTop: '70px' }}></i>
         </section>
@@ -93,10 +95,8 @@ export default function Products() {
               <div className='pt-20 lg:hidden '>
                 <h1 className='text-orange-600 text-2xl'>Buscar Producto</h1>
                 <div className='flex justify-center'>
-                  <input type="text" onChange={handleChange} value={inputValue} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
-                  <button onClick={searchProduct}>
-                    <i className="fa-solid fa-magnifying-glass fa-xl text-orange-600"></i>
-                  </button>
+                  <input type="text" onChange={(e)=>worldFilter(e)} value={searchWorld} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
+                 
                 </div>
                 <button onClick={showAll} className='underline text-white mt-10'>
                   Ver Todos
@@ -110,14 +110,12 @@ export default function Products() {
           {/* SECCION PRODUCTOS */}
           <section className=' w-full bg-black bg-[#3e3e3e] lg:border-t lg:w-[85%]'>
             <div className='pt-20 hidden lg:block lg:flex lg:flex-col'>
-              <h1 className='text-orange-600 text-2xl lg:text-center'>Buscar Producto</h1>
+              <h1 className='text-orange-600 text-2xl lg:text-center'>Buscar Productos</h1>
               <div className='flex justify-center'>
-                <input type="text" onChange={handleChange} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
-                <button onClick={searchProduct}>
-                  <i className="fa-solid fa-magnifying-glass fa-xl text-orange-600"></i>
-                </button>
+                <input type="text" value={searchWorld} onChange={(e)=> worldFilter(e)} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
+               
               </div>
-              <button onClick={deleteFilters} className='underline text-white mt-10'>
+              <button onClick={showAll} className='underline text-white mt-10'>
                 Ver Todos
               </button>
             </div>

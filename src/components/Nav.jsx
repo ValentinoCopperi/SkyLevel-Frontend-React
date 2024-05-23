@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState , useContext} from 'react'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNav } from '../features/nav/navSlice'
 import { setUserDetails } from '../features/user/userSlice'
 import { removeCart } from '../features/cart/cartSlice'
-
-
+import CartSummary from './CartSummary'
+import { useCart } from '../context/CartContext'
+import { getTotalCart } from '../../utils/getTotalCart'
 export default function Navbar() {
+    const{cart} = useCart()
+    const total = getTotalCart(cart)
+
     const [navContact, setNavContact] = useState()
     const user = useSelector(state => state?.user?.user)
-    const cart = useSelector(state => state?.cart?.cart)
-    const total = useSelector(state => state?.cart?.total)
     const navigate = useNavigate()
     const stateNavNow = useSelector(state => state.nav.navValue)
     const dispatch = useDispatch()
     const [isScroll, setIsScroll] = useState(false)
     const [userDisplay, setUserDisplay] = useState(false)
     const [showCarrito, setShowCarrito] = useState(null)
+   
+
+    
+    
     const handleLogout = async () => {
         const fetchData = await fetch('http://localhost:3000/logout', {
             method: 'get',
@@ -138,47 +144,29 @@ export default function Navbar() {
                                 duration-1000 
                                 ease-in-out 
                                 w-screen
-                                lg:w-1/4
+                                lg:w-[35%]
                                 h-full 
                                 fixed  
                                 text-center 
                                 top-0 
                                 right-0
-                                flex flex-col items-center justify-between py-5
-                                
-                        
+                                border-l
+                                flex flex-col
                         `} style={{ background: 'rgb(65,65,65) linear-gradient(302deg, rgba(65,65,65,1) 35%, rgba(55,55,55,1) 67%)' }}>
 
-                            <h1 className='text-violet-700 font-bold text-center text-4xl' style={{ fontFamily: 'unset' }}>My Bag:</h1>
-                            <div className='w-full'>
-                                {
-                                    cart.length >= 1
-                                        ? cart.map((prod,index) => {
-                                            return <article key={index} style={{
-
-                                                boxShadow: ' 0px 1px 12px 2px rgba(71,71,71,1)',
-                                                background: 'rgba(124, 124, 124, 0.2)'
-                                            }} className='flex justify-between items-center w-[80%] mx-auto py-7 px-3 my-5 '>
-                                                <div className='text-left'>
-                                                    <h1 className='text-white font-semibold text-xl'>{prod.producto}</h1>
-                                                    <h5 className='text-gray-200'>Marca: {prod.marca.toUpperCase()}</h5>
-                                                    <h5 className='text-gray-200'>Precio: ${prod.precio}</h5>
-                                                </div>
-                                                <div>
-                                                    <button style={{
-                                                        background: 'rgb(215,215,215) linear-gradient(302deg, rgba(215,215,215,1) 22%, rgba(182,182,182,1) 35%, rgba(215,215,215,1) 79%)'
-                                                    }} className='text-black p-3 rounded-3xl' onClick={()=>dispatch(removeCart({id:prod.id_producto,precio:prod.precio}))}>
-                                                        Borrar
-                                                    </button>
-                                                </div>
-
-                                            </article>
-                                        })
-                                        : <h1 className='text-white'>There are not products in your bag!</h1>
-                                }
+                            <div  style={{                    
+                                background:' rgb(215,215,215) linear-gradient(302deg, rgba(215,215,215,1) 22%, rgba(182,182,182,1) 35%, rgba(215,215,215,1) 79%)'
+                            }} className='h-[10%] place-content-center'>
+                                <h1 className='text-left text-3xl font-medium ml-5'>Carrito:</h1>
                             </div>
-                            <h5 className='text-white font-semibold text-2xl'>Total: ${total}</h5>
-                            <button onClick={() => setShowCarrito(null)} className='text-white absolute top-0 right-0'>
+                           <CartSummary/>
+                           <div  style={{                    
+                                background:' rgb(215,215,215) linear-gradient(302deg, rgba(215,215,215,1) 22%, rgba(182,182,182,1) 35%, rgba(215,215,215,1) 79%)'
+                            }}  className='h-[10%]  place-content-center'>
+                                 <h1 className='text-left text-3xl font-medium ml-5'>TOTAL: ${total}</h1>
+                            </div>
+
+                            <button onClick={() => setShowCarrito(null)} className='text-black font-extrabold absolute top-1 right-1'>
                                 Close
                             </button>
 

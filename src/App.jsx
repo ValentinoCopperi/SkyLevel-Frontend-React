@@ -12,10 +12,10 @@ import { setUserDetails } from "./features/user/userSlice"
 import { useNavigate } from "react-router-dom"
 import AllUsers from "./components/UsersAdmin/AllUsers"
 import { useCart } from "./context/CartContext"
+
 function App() {
-  
-  const navigate = useNavigate()
   const user = useSelector(state => state?.user?.user)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const fetchUserDetails = async () => {
     const dataResponse = await fetch('http://localhost:3000/user-details', {
@@ -30,7 +30,7 @@ function App() {
     }
   }
 
-
+  
   useEffect(() => {
     /*User <details></details>*/
     fetchUserDetails()
