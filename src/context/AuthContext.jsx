@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }) => {
                 credentials: 'include' // Incluye cookies en la solicitud
             });
 
-            console.log(response)
     
             if (response.status == 200) {
                 // Redirige al usuario a la página principal
