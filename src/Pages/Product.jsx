@@ -47,7 +47,7 @@ export default function Product() {
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
         <section className='max-[700px]:flex-col
-        flex items-center border-b border-white shadow-lg shadow-violet-500/50'>
+        flex items-center border-bC border-white shadow-lg shadow-violet-500/50'>
           {/* DATOS PRODUCTO SELECCIONADO */}
           <article className='max-[700px]:py-2
           py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>
@@ -108,7 +108,7 @@ export default function Product() {
             {
               relatedProducts.length ?
                 relatedProducts.map((prod) => {
-                  return <article key={prod.id_product} className=' w-[35%] m-3 cursor-pointer p-10 bg-[#18181a]  hover:bg-black lg:w-1/3 lg:m-5' style={{ boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)', transition: '.5s ease-in-out' }}>
+                  return <article key={prod.id_product} className=' w-[85%] md:w-[35%] m-3 cursor-pointer p-10 bg-[#18181a]  hover:bg-black lg:w-1/3 lg:m-5' style={{ boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)', transition: '.5s ease-in-out' }}>
                     <div className='h-full flex flex-col items-center justify-center'>
                       <img src={`/productos/${prod.img_1}.png`} alt="" className='w-[220px]' />
                       <h1 className='text-white'>{prod.name}</h1>
