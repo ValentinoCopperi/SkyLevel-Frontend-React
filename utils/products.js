@@ -8,7 +8,6 @@ export default async function getAllProducts(){
     })
     .then(res => res)
     .then(response => {
-        
         const products = response.data.data;
 
         if (response.status !== 200) return { error: true, message : response.error  }

@@ -11,7 +11,9 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch('https://api-4-ai9l.onrender.com/api/auth/user',{credentials:'include'}); // Supongamos que tienes un endpoint para obtener los datos del usuario.
+                const response = await fetch('https://api-4-ai9l.onrender.com/api/auth/user',{credentials:'include',headers: {
+                    'Content-Type': 'application/json'
+                }}); // Supongamos que tienes un endpoint para obtener los datos del usuario.
                 const data = await response.json();
                 
                 setUser(data.user)
