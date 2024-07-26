@@ -9,20 +9,21 @@ import { ProductsContext } from '../context/ProductsContext'
 import { useCart } from '../context/CartContext'
 export default function Product() {
   let { id } = useParams()
-  const {getProductById,productos} = useContext(ProductsContext)
-  const {addCart} = useCart()
-  const [producto,setProducto] = useState({})
+  const { getProductById, productos } = useContext(ProductsContext)
+  const { addCart } = useCart()
+  const [producto, setProducto] = useState({})
   const [mainImage, setMainImage] = useState()
-  useEffect(()=>{
-    getProductById(id).then(producto =>{
+  useEffect(() => {
+    getProductById(id).then(producto => {
       setProducto(producto)
-      setMainImage(producto.img_1)})
-  },[id])
+      setMainImage(producto.img_1)
+    })
+  }, [id])
 
   const user = useSelector(state => state?.user?.user)
-  const [noticeLogin,setNoticeLogin] = useState(null)
-  console.log(producto)  
-  
+  const [noticeLogin, setNoticeLogin] = useState(null)
+  console.log(producto)
+
   const handleMainImage = (e) => {
 
     setMainImage(e.target.parentElement.value)
@@ -31,14 +32,14 @@ export default function Product() {
 
   //ARREGLARLO
 
-  // const relatedProducts = productos.filter((prod)=>{
-  //   if(prod.id_product != id){
-  //     return prod.category == producto.category || prod.brand == producto.brand
-  //   }
-  // })
+  const relatedProducts = productos.filter((prod) => {
+    if (prod.id_product != id) {
+      return prod.cateory_name == producto.name_category_name || prod.brand_name == producto.brand_name
+    }
+  })
 
-  
-  
+
+
   return (
     <section style={{ background: 'rgb(0,0,0) linear-gradient(170deg, rgba(0,0,0,1) 24%, rgba(78,0,103,1) 95%)' }}>
       <Navbar></Navbar>
@@ -46,7 +47,7 @@ export default function Product() {
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
         <section className='max-[700px]:flex-col
-        flex items-center border- border-white shadow-lg shadow-violet-500/50'>
+        flex items-center border-b border-white shadow-lg shadow-violet-500/50'>
           {/* DATOS PRODUCTO SELECCIONADO */}
           <article className='max-[700px]:py-2
           py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>
@@ -55,7 +56,7 @@ export default function Product() {
             <div className='flex'>
               <h5 className='text-red-600 text-2xl'>${producto.price}.00</h5>
               <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1 cursor-pointer  hover:bg-orange-600 hover:text-orange-200'>
-                <motion.div onClick={()=>{user ?  addCart(producto) : setNoticeLogin(true)}}>
+                <motion.div onClick={() => { user ? addCart(producto) : setNoticeLogin(true) }}>
                   Comprar
                 </motion.div>
               </h5>
@@ -74,7 +75,7 @@ export default function Product() {
                         </Link>
                       </motion.button>
                     </motion.div>
-                    
+
                   </div>
                 }
               </AnimatePresence>
@@ -100,37 +101,37 @@ export default function Product() {
         </section>
 
         {/* SECCION PRODUCTOS RELACIONADOS */}
-        {/* <section className='bg-[#202020]'>
-            <h1 className='text-white text-center text-3xl py-5'>Productos Relacionados:</h1>
-            <div className=' max-[700px]:flex-col
+        <section className='bg-[#202020]'>
+          <h1 className='text-white text-center text-3xl py-5'>Productos Relacionados:</h1>
+          <div className=' max-[700px]:flex-col
               flex flex-wrap items-center justify-center'>
-                {
-                  relatedProducts.length ? 
-                  relatedProducts.map((prod) => {
-                    return <article key={prod.id_producto} className=' w-[35%] m-3 cursor-pointer p-10 bg-[#18181a]  hover:bg-black lg:w-1/3 lg:m-5' style={{boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)' , transition:'.5s ease-in-out'}}>
-                      <div className='h-full flex flex-col items-center justify-center'>
-                        <img src={`/productos/${prod.imagen_1}.png`} alt="" className='w-[220px]' />
-                        <h1 className='text-white'>{prod.producto}</h1>
-                        <h5 className='text-orange-400'>{prod.marca} - {prod.categoria}</h5>
-                        <div className='flex items-center mt-3'>
-                          <h5 className='text-zinc-500 border p-1 text-center hover:text-orange-400'>
-                            <Link to={`/products/${prod.id_producto}`}>Descubre Mas</Link>
-                          </h5>
-                          <h5 className='text-zinc-500 border p-1 ml-4  hover:text-orange-400'>
-                            <button>Comprar</button>
-                          </h5>
-                        </div>
+            {
+              relatedProducts.length ?
+                relatedProducts.map((prod) => {
+                  return <article key={prod.id_product} className=' w-[35%] m-3 cursor-pointer p-10 bg-[#18181a]  hover:bg-black lg:w-1/3 lg:m-5' style={{ boxShadow: '1px 2px 15px 6px rgba(207,90,0,0.42)', transition: '.5s ease-in-out' }}>
+                    <div className='h-full flex flex-col items-center justify-center'>
+                      <img src={`/productos/${prod.img_1}.png`} alt="" className='w-[220px]' />
+                      <h1 className='text-white'>{prod.name}</h1>
+                      <h5 className='text-orange-400'>{prod.brand_name} - {prod.cateory_name}</h5>
+                      <div className='flex items-center mt-3'>
+                        <h5 className='text-zinc-500 border p-1 text-center hover:text-orange-400'>
+                          <Link to={`/products/${prod.id_product}`}>Descubre Mas</Link>
+                        </h5>
+                        <h5 className='text-zinc-500 border p-1 ml-4  hover:text-orange-400'>
+                          <button>Comprar</button>
+                        </h5>
                       </div>
-                
-                    </article>
-                    })
-                  : <h5 className='text-white'>No Hay Productos Relacionados a {producto.producto}</h5>
-                }
-            </div>
-        </section> */}
+                    </div>
+
+                  </article>
+                })
+                : <h5 className='text-white'>No Hay Productos Relacionados a {producto.producto}</h5>
+            }
+          </div>
+        </section>
       </div>
       <Footer></Footer>
-    
+
     </section>
   )
 }

@@ -26,7 +26,7 @@ export default function Products() {
   useEffect(() => {
 
     function getCategorias() {
-      fetch('http://localhost:3000/category')
+      fetch('https://api-4-ai9l.onrender.com/api/category')
         .then(res => {
           // Verifica si la respuesta fue exitosa
           if (!res.ok) {
@@ -46,7 +46,7 @@ export default function Products() {
         });
     }
     function getMarcas() {
-      fetch('http://localhost:3000/brands')
+      fetch('https://api-4-ai9l.onrender.com/api/brands')
         .then(res => {
           // Verifica si la respuesta fue exitosa
           if (!res.ok) {

@@ -6,10 +6,12 @@ export const ProductsContext = createContext()
 export default function ProductsContextProvider({ children }) {
 
     const [productos, setProducts] = useState([])
+    const[loading,setLoading]  = useState(false)
     const [sortMax, setSortMax] = useState(false)
     const [maxPrice, setMaxPrice] = useState(200)
     const [productosFiltrados, setProductosFiltrados] = useState([])
     const[searchWorld , setSearchWorld] = useState('')
+
     const handleSort = () => {
         if (productosFiltrados.length >= 1) {
             if (sortMax) {
@@ -30,9 +32,6 @@ export default function ProductsContextProvider({ children }) {
         }
         setSortMax(!sortMax)
     }
-
-
-
     const worldFilter = (e) => {
         setSearchWorld(e.target.value)
        
@@ -62,29 +61,28 @@ export default function ProductsContextProvider({ children }) {
             setProductosFiltrados([])
         }
     }
-
     const handleMaxPrice = (value) => setMaxPrice(value)
-
     const getProductById = async (id) => {
         console.log(productos)
         const producto = productos.find(prod => prod.id_product == id)
         return producto
     }
     const getProducts = async () => {
+        setLoading(true)
         try {
             const data = await getAllProducts()
             
             if (data.error) {
                 //AVISAR DEL ERROR
-
-
-
             } else {
                 setProducts(data.products)
+                
             }
 
         } catch (error) {
 
+        }finally{
+            setLoading(false)
         }
     }
     useEffect(() => {
@@ -93,7 +91,7 @@ export default function ProductsContextProvider({ children }) {
 
     return (
         <ProductsContext.Provider
-            value={{ searchWorld,showAll, productos, productosFiltrados, handleFilter, handleSort, sortMax, getProducts, handleMaxPrice, maxPrice, getProductById, worldFilter }}
+            value={{ searchWorld,showAll, productos, productosFiltrados, handleFilter, handleSort, sortMax, getProducts, handleMaxPrice, maxPrice, getProductById, worldFilter, loading }}
         >
             {children}
         </ProductsContext.Provider>
