@@ -48,14 +48,14 @@ export default function Home() {
             <h5 className='text-white'>
             </h5>
             <h5 style={{
-              color: 'pink',
-              border: '1px solid pink',
+             
+              border: '1px solid violet',
               padding: '0.5rem',
               marginTop: '10px',
               width: '120px',
               textAlign: 'center'
-            }}>
-              <Link>
+            }} className='hover:bg-violet-500 hover:border-none transition-all duration-500 text-violet-100 rounded-md hover:text-white'>
+              <Link to="/products">
                 Shop Now
               </Link>
             </h5>
@@ -188,10 +188,10 @@ export default function Home() {
                   alignItems: 'center',
                   borderRadius: '10px',
                 }}>
-                  <Link>
+                  <Link to="/products">
                     VER MAS
                   </Link>
-                  <Link style={{
+                  <Link  to="/products" style={{
                     background: '#5C189C',
                     padding: '5px',
                     borderRadius: '50%  '

@@ -1,13 +1,15 @@
 import axios from "axios";
 export default async function getAllProducts(){
-    return axios.get('http://localhost:3000/productos')
+    return axios.get('https://api-4-ai9l.onrender.com/api/products')
     .then(res => res)
-    .then(data => {
-        const res = data.data
-        if (res.error == true) return { error: true, message : res.message }
-        return { products : res.data , error: false  , message : res.message}
+    .then(response => {
+        
+        const products = response.data.data;
+
+        if (response.status !== 200) return { error: true, message : response.error  }
+        return { products  , error : false}
     })
-    .catch(err => res.json({error:true,message:res.message}))
+    .catch(err => res.json({error:true,message:err}))
 }
 
 // export default async function getCategories(){

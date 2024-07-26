@@ -7,12 +7,15 @@ import { removeCart } from '../features/cart/cartSlice'
 import CartSummary from './CartSummary'
 import { useCart } from '../context/CartContext'
 import { getTotalCart } from '../../utils/getTotalCart'
+import { useAuth } from '../context/AuthContext'
 export default function Navbar() {
     const{cart} = useCart()
     const total = getTotalCart(cart)
 
     const [navContact, setNavContact] = useState()
-    const user = useSelector(state => state?.user?.user)
+    
+    const {user , logout} = useAuth();
+
     const navigate = useNavigate()
     const stateNavNow = useSelector(state => state.nav.navValue)
     const dispatch = useDispatch()
@@ -23,19 +26,7 @@ export default function Navbar() {
 
     
     
-    const handleLogout = async () => {
-        const fetchData = await fetch('http://localhost:3000/logout', {
-            method: 'get',
-            credentials: 'include'
-        })
-
-        const dataResponse = await fetchData.json()
-        if (dataResponse.success) {
-            dispatch(setUserDetails(null))
-            navigate('/')
-            window.location.reload()
-        }
-    }
+    
 
 
     const handleScroll = () => {
@@ -211,7 +202,7 @@ export default function Navbar() {
                     {
                         user?.id ?
 
-                            <button className='hover:bg-indigo-600 transition-colors duration-500 my-3 text-white text-xl bg-indigo-500 rounded-2xl px-3 w-full md:mx-4 md:my-0' onClick={handleLogout}>
+                            <button className='hover:bg-indigo-600 transition-colors duration-500 my-3 text-white text-xl bg-indigo-500 rounded-2xl px-3 w-full md:mx-4 md:my-0' onClick={logout}>
                                 Logout
                             </button>
                             :

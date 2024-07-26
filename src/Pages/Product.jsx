@@ -16,24 +16,26 @@ export default function Product() {
   useEffect(()=>{
     getProductById(id).then(producto =>{
       setProducto(producto)
-     setMainImage(producto.imagen_1)})
+      setMainImage(producto.img_1)})
   },[id])
 
   const user = useSelector(state => state?.user?.user)
-  const dispatch = useDispatch()
   const [noticeLogin,setNoticeLogin] = useState(null)
-  
+  console.log(producto)  
   
   const handleMainImage = (e) => {
 
     setMainImage(e.target.parentElement.value)
   }
 
-  const relatedProducts = productos.filter((prod)=>{
-    if(prod.id_producto != id){
-      return prod.categoria == producto.categoria || prod.marca == producto.marca
-    }
-  })
+
+  //ARREGLARLO
+
+  // const relatedProducts = productos.filter((prod)=>{
+  //   if(prod.id_product != id){
+  //     return prod.category == producto.category || prod.brand == producto.brand
+  //   }
+  // })
 
   
   
@@ -44,14 +46,14 @@ export default function Product() {
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
         <section className='max-[700px]:flex-col
-        flex items-center border-b-4 border-white shadow-lg shadow-violet-500/50'>
+        flex items-center border- border-white shadow-lg shadow-violet-500/50'>
           {/* DATOS PRODUCTO SELECCIONADO */}
           <article className='max-[700px]:py-2
           py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>
-            <h1 className='text-orange-400 text-3xl'>{producto.producto}</h1>
-            <p className='my-5'>{producto.datos}</p>
+            <h1 className='text-orange-400 text-xl sm:text-3xl'>{producto.name}</h1>
+            <p className='my-5 text-sm sm:text-xl'>{producto.data}</p>
             <div className='flex'>
-              <h5 className='text-red-600 text-2xl'>${producto.precio}.00</h5>
+              <h5 className='text-red-600 text-2xl'>${producto.price}.00</h5>
               <h5 className='text-orange-100 bg-orange-700 ml-4  rounded-md p-1 cursor-pointer  hover:bg-orange-600 hover:text-orange-200'>
                 <motion.div onClick={()=>{user ?  addCart(producto) : setNoticeLogin(true)}}>
                   Comprar
@@ -84,21 +86,21 @@ export default function Product() {
             <img src={`/productos/${mainImage}.png`} alt="" className='w-[90%] lg:w-1/2' />
             <div className='flex flex-row w-[96%]
               lg:flex lg:flex-col lg:w-1/3 '>
-              <button className='border border-white mx-auto w-1/3' value={producto.imagen_1} onClick={handleMainImage}>
-                <img src={`/productos/${producto.imagen_1}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.img_1} onClick={handleMainImage}>
+                <img src={`/productos/${producto.img_1}.png`} alt="" />
               </button>
-              <button className='border border-white mx-auto w-1/3' value={producto.imagen_2} onClick={handleMainImage}>
-                <img src={`/productos/${producto.imagen_2}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.img_2} onClick={handleMainImage}>
+                <img src={`/productos/${producto.img_2}.png`} alt="" />
               </button>
-              <button className='border border-white mx-auto w-1/3' value={producto.imagen_3} onClick={handleMainImage}>
-                <img src={`/productos/${producto.imagen_3}.png`} alt="" />
+              <button className='border border-white mx-auto w-1/3' value={producto.img_3} onClick={handleMainImage}>
+                <img src={`/productos/${producto.img_3}.png`} alt="" />
               </button>
             </div>
           </article>
         </section>
 
         {/* SECCION PRODUCTOS RELACIONADOS */}
-        <section className='bg-[#202020]'>
+        {/* <section className='bg-[#202020]'>
             <h1 className='text-white text-center text-3xl py-5'>Productos Relacionados:</h1>
             <div className=' max-[700px]:flex-col
               flex flex-wrap items-center justify-center'>
@@ -125,7 +127,7 @@ export default function Product() {
                   : <h5 className='text-white'>No Hay Productos Relacionados a {producto.producto}</h5>
                 }
             </div>
-        </section>
+        </section> */}
       </div>
       <Footer></Footer>
     

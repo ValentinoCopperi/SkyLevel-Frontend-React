@@ -12,33 +12,16 @@ import { setUserDetails } from "./features/user/userSlice"
 import { useNavigate } from "react-router-dom"
 import AllUsers from "./components/UsersAdmin/AllUsers"
 import { useCart } from "./context/CartContext"
+import { useAuth } from "./context/AuthContext"
 
 function App() {
-  const user = useSelector(state => state?.user?.user)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const fetchUserDetails = async () => {
-    const dataResponse = await fetch('http://localhost:3000/user-details', {
-      method: 'get',
-      credentials: 'include'
-    })
 
-    const dataApi = await dataResponse.json()
-
-    if (dataApi.success) {
-      dispatch(setUserDetails(dataApi.data))
-    }
-  }
-
+  const  { user } =  useAuth();
   
-  useEffect(() => {
-    /*User <details></details>*/
-    fetchUserDetails()
-  }, [])
   return (
     <>
       <Context.Provider value={{
-        fetchUserDetails // user detail fetch
+      
       }}>
         <div className="app">
           <Routes>

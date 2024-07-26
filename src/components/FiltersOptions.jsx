@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { ProductsContext } from '../context/ProductsContext'
 export default function FiltersOptions({ marcas, categorias, setFilter }) {
     const { handleSort, sortMax , handleMaxPrice , maxPrice , handleFilter} = useContext(ProductsContext)
+    
     const handleSiblingClass = (e) => {
         let clase = ''
         if (e.target.parentElement.parentElement.nextElementSibling.classList.contains('hidden')) {
@@ -32,11 +33,11 @@ export default function FiltersOptions({ marcas, categorias, setFilter }) {
             <div className='flex flex-col-reverse bg-slate-800 mt-[60px] lg:m-0 lg:bg-[#3e3e3e] lg:flex lg:flex-col'>
                 {
                     categorias.map((categoria) => {
-                        return <div key={categoria.id}>
+                        return <div key={categoria.id_category}>
                             <div className='flex w-full justify-between items-center px-3 py-3 lg:p-1 lg:border-b lg:border-white'>
-                                <h1 className='text-white' style={{ transition: 'color .5s ease-in-out' }}>{categoria.categoria.toUpperCase()}</h1>
+                                <h1 className='text-white' style={{ transition: 'color .5s ease-in-out' }}>{categoria.category_name.toUpperCase()}</h1>
                                 <button onClick={handleSiblingClass}>
-                                    <i className="fa-solid fa-plus fa-2xs text-white p-3" id={categoria.categoria} style={{ transition: 'color .5s ease-in-out' }}></i>
+                                    <i className="fa-solid fa-plus fa-2xs text-white p-3" id={categoria.category_name} style={{ transition: 'color .5s ease-in-out' }}></i>
                                 </button>
                             </div>
                             <div className='hidden bg-slate-700 lg:bg-[#3e3e3e]' style={{ transition: 'opacity 3s ease-in-out' }}>
@@ -44,9 +45,9 @@ export default function FiltersOptions({ marcas, categorias, setFilter }) {
                                     <form>
                                         {
                                             marcas.map((marca) => {
-                                                return <li key={marca.id} className='flex justify-between mx-8'>
-                                                    <h1 className='text-white'>{marca.marca.toUpperCase()}</h1>
-                                                    <input type="radio" name='filter' value={marca.marca} onClick={() => handleFilter(categoria.categoria, marca.marca)} />
+                                                return <li key={marca.id_brand} className='flex justify-between mx-8'>
+                                                    <h1 className='text-white'>{marca.brand_name.toUpperCase()}</h1>
+                                                    <input type="radio" name='filter' value={marca.brand_name} onClick={() => handleFilter(categoria.category_name, marca.brand_name)} />
                                                 </li>
 
                                             })
@@ -89,7 +90,7 @@ export default function FiltersOptions({ marcas, categorias, setFilter }) {
                         name="maxPrice" 
                         id="maxPrice" 
                         min={0}
-                        max={1000}
+                        max={200}
                         step={5}
                         defaultValue={maxPrice}
                         value={maxPrice}

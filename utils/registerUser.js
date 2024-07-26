@@ -2,15 +2,19 @@ import axios from "axios"
 export default async function registerUser(datos) {
 
 
-    return axios.post('http://localhost:3000/register', datos)
-        .then(res => {
-            if (res.data.Error == true) return { error: true, message : res.data.Message }
-            return { error: false  , message : res.data.Message}
-        })
-        .catch(err => {
-            return { error: true , message : res.data.Message}
-        })
+    try {
+        const res = await axios.post('https://api-4-ai9l.onrender.com/api/auth/register', datos);
+        if (res.status !== 200) {
+            return { error: true, message: res.data.msg };
+        }
+        return { error: false, message: res.data.msg };
+    } catch (err) {
+        if (err.response) {
+            return { error: true, message: err.response.data.msg };
+        } else {
+            return { error: true, message: 'An unknown error occurred' };
+        }
+    }
 
 
 }
-

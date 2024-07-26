@@ -11,8 +11,8 @@ import { ProductsContext } from './../context/ProductsContext';
 
 
 export default function Products() {
-  const {productos,showAll,worldFilter,searchWorld} = useContext(ProductsContext)
-  
+  const { productos, showAll, worldFilter, searchWorld } = useContext(ProductsContext)
+
   const stateNavNow = useSelector(stateNav)
   const [helloFilter, setHelloFilter] = useState(false)
   const [inputValue, setInputValue] = useState('Buscar...')
@@ -24,47 +24,74 @@ export default function Products() {
     setInputValue(e.target.value)
   }
   useEffect(() => {
-   
+
     function getCategorias() {
-      fetch('http://localhost:3000/categorias')
-        .then(res => res.json())
-        .then(data => setCategorias(data.data))
+      fetch('http://localhost:3000/category')
+        .then(res => {
+          // Verifica si la respuesta fue exitosa
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+          // Convierte la respuesta en JSON
+          return res.json();
+        })
+        .then(data => {
+          // Aquí tienes acceso a la data que obtuviste del servidor
+          console.log(data);
+          setCategorias(data.data)
+        })
+        .catch(err => {
+          // Maneja errores, si los hay
+          console.error('There has been a problem with your fetch operation:', err);
+        });
     }
     function getMarcas() {
-      fetch('http://localhost:3000/marcas')
-        .then(res => res.json())
-        .then(data => setMarcas(data.data))
+      fetch('http://localhost:3000/brands')
+        .then(res => {
+          // Verifica si la respuesta fue exitosa
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+          // Convierte la respuesta en JSON
+          return res.json();
+        })
+        .then(data => {
+          // Aquí tienes acceso a la data que obtuviste del servidor
+          console.log(data);
+          setMarcas(data.data)
+        })
+        .catch(err => {
+          // Maneja errores, si los hay
+          console.error('There has been a problem with your fetch operation:', err);
+        });
+
     }
 
     getCategorias()
     getMarcas()
   }, [])
 
+
+
   const setFilter = (categoria, marca) => {
-    
-    const productsFilter = productos.filter((prod) => prod.marca == marca &&  prod.categoria == categoria)
-    if(productsFilter.length){
+
+    const productsFilter = productos.filter((prod) => prod.brand_name == marca && prod.category_name == categoria)
+    if (productsFilter.length) {
       setProductosFiltrados(productsFilter)
-    }else{
+    } else {
       setProductosFiltrados(1)
     }
   }
- 
-  const searchProduct = () => {
-    setProductosFiltrados(productos.filter((prod) => prod.producto.toLowerCase().includes(inputValue.toLowerCase())))
-  }
-  const deleteFilters = () => {
-    setProductosFiltrados(productos)
-  }
 
  
 
-  
+
+
   return (
     <div>
       <Navbar  ></Navbar>
       <section className={`${stateNavNow ? 'hidden' : ''} h-auto bg-black`}>
-        
+
         {/* PRODUCTOS HEADER */}
         <section className=' grid content-center text-center  h-auto' style={{ paddingTop: '90px', backgroundAttachment: 'fixed', backgroundImage: 'url(/img/bg-contact.png)', backgroundPosition: 'center', backgroundSize: 'cover', width: '100%', height: '100vh' }}>
           <h1 className='text-4xl text-white font-bold md:text-7xl'>EXPLORAR PRODUCTOS</h1>
@@ -72,8 +99,8 @@ export default function Products() {
         </section>
 
         {/* BANNER PRODUCTOS */}
-        
-       <Carousel />
+
+        <Carousel />
 
         <div className='lg:flex'>
           {/* FILTERS */}
@@ -95,8 +122,8 @@ export default function Products() {
               <div className='pt-20 lg:hidden '>
                 <h1 className='text-orange-600 text-2xl'>Buscar Producto</h1>
                 <div className='flex justify-center'>
-                  <input type="text" onChange={(e)=>worldFilter(e)} value={searchWorld} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
-                 
+                  <input type="text" onChange={(e) => worldFilter(e)} value={searchWorld} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
+
                 </div>
                 <button onClick={showAll} className='underline text-white mt-10'>
                   Ver Todos
@@ -112,8 +139,8 @@ export default function Products() {
             <div className='pt-20 hidden lg:block lg:flex lg:flex-col'>
               <h1 className='text-orange-600 text-2xl lg:text-center'>Buscar Productos</h1>
               <div className='flex justify-center'>
-                <input type="text" value={searchWorld} onChange={(e)=> worldFilter(e)} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
-               
+                <input type="text" value={searchWorld} onChange={(e) => worldFilter(e)} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />
+
               </div>
               <button onClick={showAll} className='underline text-white mt-10'>
                 Ver Todos

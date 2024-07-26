@@ -28,15 +28,15 @@ export default function Carousel() {
             <h1 className='text-4xl text-orange-500 text-center' style={{fontFamily:'serif',fontSize:'bolder'}}>MONITORES</h1>
             <div className='flex items-center justify-center py-5'>
               <div className='flex flex-col items-center justify-center'>
-               <img src="productos/Monitores-AORUS-FO32.png" alt="Imagen 1" className='w-[90%] drop-shadow-md hover:drop-shadow-2xl'/>
+               <img src="productos/Monitors-AORUS-FO32.png" alt="Imagen 1" className='w-[90%] drop-shadow-md hover:drop-shadow-2xl'/>
                <h5 className='text-white text-center'>RXT-540</h5>
               </div>
               <div className='flex flex-col items-center justify-center'>
-               <img src="productos/Monitores-AORUS-FO32(1).png" alt="Imagen 1"className='w-[90%] drop-shadow-[13px_1px_13px_#000000]'/>
+               <img src="productos/Monitors-AORUS-FO32(1).png" alt="Imagen 1"className='w-[90%] drop-shadow-[13px_1px_13px_#000000]'/>
                <h5 className='text-white text-center'>RXT-540</h5>
               </div>
               <div className='flex flex-col items-center justify-center'>
-               <img src="productos/Monitores-AORUS-FO32(2).png" alt="Imagen 1"className='w-[90%] drop-shadow-md hover:drop-shadow-2xl' />
+               <img src="productos/Monitors-AORUS-FO32(2).png" alt="Imagen 1"className='w-[90%] drop-shadow-md hover:drop-shadow-2xl' />
                <h5 className='text-white text-center'>RXT-540</h5>
               </div>              
             </div>

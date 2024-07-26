@@ -7,24 +7,24 @@ export default function ProductsContextProvider({ children }) {
 
     const [productos, setProducts] = useState([])
     const [sortMax, setSortMax] = useState(false)
-    const [maxPrice, setMaxPrice] = useState(1000)
+    const [maxPrice, setMaxPrice] = useState(200)
     const [productosFiltrados, setProductosFiltrados] = useState([])
     const[searchWorld , setSearchWorld] = useState('')
     const handleSort = () => {
         if (productosFiltrados.length >= 1) {
             if (sortMax) {
-                const sortedProducts = productosFiltrados.toSorted((a, b) => a.precio - b.precio)
+                const sortedProducts = productosFiltrados.toSorted((a, b) => a.price - b.price)
                 setProductosFiltrados(sortedProducts)
             } else {
-                const sortedProducts = productosFiltrados.toSorted((a, b) => b.precio - a.precio)
+                const sortedProducts = productosFiltrados.toSorted((a, b) => b.price - a.price)
                 setProductosFiltrados(sortedProducts)
             }
         } else {
             if (sortMax) {
-                const sortedProducts = productos.toSorted((a, b) => a.precio - b.precio)
+                const sortedProducts = productos.toSorted((a, b) => a.price - b.price)
                 setProducts(sortedProducts)
             } else {
-                const sortedProducts = productos.toSorted((a, b) => b.precio - a.precio)
+                const sortedProducts = productos.toSorted((a, b) => b.price - a.price)
                 setProducts(sortedProducts)
             }
         }
@@ -35,15 +35,16 @@ export default function ProductsContextProvider({ children }) {
 
     const worldFilter = (e) => {
         setSearchWorld(e.target.value)
+       
         if (searchWorld.length <= 1) {
             setProductosFiltrados(productos)
         } else {
             const productsFilter = productos.filter(prod => {
-                return prod.producto.toLowerCase().includes(searchWorld.toLowerCase())
+                return prod.name.toLowerCase().includes(searchWorld.toLowerCase())
                     ||
-                    prod.marca.toLowerCase().includes(searchWorld.toLowerCase())
+                    prod.brand_name.toLowerCase().includes(searchWorld.toLowerCase())
                     ||
-                    prod.categoria.toLowerCase().includes(searchWorld.toLowerCase())
+                    prod.category_name.toLowerCase().includes(searchWorld.toLowerCase())
             })
             setProductosFiltrados(productsFilter)
         }
@@ -54,7 +55,7 @@ export default function ProductsContextProvider({ children }) {
         setMaxPrice(1000)
     }
     const handleFilter = (categoria, marca) => {
-        const productsFilter = productos.filter((prod) => prod.marca == marca && prod.categoria == categoria)
+        const productsFilter = productos.filter((prod) => prod.brand_name == marca && prod.category_name == categoria)
         if (productsFilter.length) {
             setProductosFiltrados(productsFilter)
         } else {
@@ -65,13 +66,18 @@ export default function ProductsContextProvider({ children }) {
     const handleMaxPrice = (value) => setMaxPrice(value)
 
     const getProductById = async (id) => {
-        const producto = productos.find(prod => prod.id_producto == id)
+        console.log(productos)
+        const producto = productos.find(prod => prod.id_product == id)
         return producto
     }
     const getProducts = async () => {
         try {
             const data = await getAllProducts()
+            
             if (data.error) {
+                //AVISAR DEL ERROR
+
+
 
             } else {
                 setProducts(data.products)

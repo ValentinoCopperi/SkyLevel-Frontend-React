@@ -7,8 +7,11 @@ import axios from 'axios'
 import Context from '../context'
 import { useForm } from 'react-hook-form'
 import registerUser from '../../utils/registerUser'
+import { useAuth } from '../context/AuthContext'
 export default function Login() {
     const { fetchUserDetails } = useContext(Context)
+
+    const { login  } = useAuth();
 
     const {
         register: registerLogin,
@@ -30,6 +33,7 @@ export default function Login() {
         defaultValues: {
             name : '',
             emailRegister: '',
+            phone: '',
             passwordRegister: '',
             confPasswordRegister: ''
         }
@@ -53,35 +57,34 @@ export default function Login() {
     const [showRegisterPass, setShowRegisterPass] = useState(false)
 
 
-    const handdleLogin = loginSubmit((data) => {
+    const handdleLogin = loginSubmit(async (data) => {
         const datos = {
-            user: data.emailLogin,
+            email: data.emailLogin,
             password: data.passwordLogin
         }
+        
+        login(datos)
+        .then(res => {
+            if(res.error){
+                setLoginAdvice(res.msg);
+                return;
+            }
 
-        axios.post('http://localhost:3000/login', datos, { withCredentials: 'include' })
-            .then(res => {
-                if (res.data.Error) {
-                    setLoginAdvice(res.data.Error)
-                    return
-                }
-                if (res.data.Status == true) {
-
-                    setLoginAdvice("Login Success")
-                    fetchUserDetails()
-                    navigate('/')
-                } else {
-                    setLoginAdvice("Contraseña incorrecta")
-                }
-            })
+            setLoginAdvice(res.msg)
+            
+        })
+        
+       
     })
 
     const handleRegister = handleRegisterSubmit((data) => {
         const datos = {
             name: data.name,
-            user: data.emailRegister,
+            email: data.emailRegister,
+            phone:data.phone,
             password: data.passwordRegister
         }
+        
         registerUser(datos)
             .then((res) => {
                 if (res.error == true) {
@@ -99,15 +102,9 @@ export default function Login() {
             <Navbar></Navbar>
             <section className='login'>
                 <div className="container" id="container">
-                    <div className="form-container sign-up-container">
+                    <div className="form-container sign-up-container overflow-y-auto">
                         <form action="#" className='form' onSubmit={handleRegister}>
                             <h1>Create Account</h1>
-                            <div className="social-container">
-                                <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                                <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                                <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-                            </div>
-                            <span>or use your email for registration</span>
                             <input type="text" placeholder="Name"
                                 {
                                 ...registerRegister('name', {
@@ -145,6 +142,18 @@ export default function Login() {
                                 } />
                             {
                                 errorsRegister.emailRegister && <span className='text-red-400'>{errorsRegister.emailRegister?.message}</span>
+                            }
+                            <input type="number" placeholder="Phone"
+                                {
+                                ...registerRegister('phone', {
+                                    required: {
+                                        value: true,
+                                        message: 'Phone must be provided'
+                                    },
+                                })
+                                } />
+                            {
+                                errorsRegister.phone && <span className='text-red-400'>{errorsRegister.phone?.message}</span>
                             }
                             <div className='relative w-full'>
                                 <input type={showRegisterPass ? 'text' : 'password'} placeholder="Password"
