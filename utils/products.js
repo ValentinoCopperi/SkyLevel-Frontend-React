@@ -1,6 +1,11 @@
 import axios from "axios";
 export default async function getAllProducts(){
-    return axios.get('https://api-4-ai9l.onrender.com/api/products')
+    return axios.get('https://api-4-ai9l.onrender.com/api/products', {
+        withCredentials: true, // Asegura que las cookies se envíen con la solicitud
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     .then(res => res)
     .then(response => {
         

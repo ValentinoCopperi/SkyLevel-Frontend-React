@@ -52,8 +52,9 @@ export const AuthProvider = ({ children }) => {
         
         try {
 
-            const res = await axios.post('https://api-4-ai9l.onrender.com/api/auth/login', datos, { withCredentials: true })
-
+            const res = await axios.post('https://api-4-ai9l.onrender.com/api/auth/login', datos, { withCredentials: true ,headers: {
+                'Content-Type': 'application/json'
+            }})
 
             if (res.status !== 200) return { error: true, msg: res.data.msg };
 
