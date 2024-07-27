@@ -80,7 +80,6 @@ export default function ProductsContextProvider({ children }) {
             }
 
         } catch (error) {
-
         }finally{
             setLoading(false)
         }

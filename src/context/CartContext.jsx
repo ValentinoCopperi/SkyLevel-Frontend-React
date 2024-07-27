@@ -12,16 +12,16 @@ export const CartProvider = ({children}) => {
 
     const addCart = (product) => {
         setCart(prev=>[...prev,product])
-        setTotal((prev)=>prev+product.precio)
+        setTotal((prev)=>prev+product.price)
     }
     const removeCart = (id,price) => {
-        setCart(cart.filter((prod)=> prod.id !== id))
+        setCart(cart.filter((prod)=> prod.id_product !== id_product))
         setTotal((prev)=> prev - price)
     }
     
     const deleteProductCart = (prod,idx) => {
         const newCart = [...cart]
-        var index = newCart.map(producto => producto.id_producto).indexOf(prod.id_producto)
+        var index = newCart.map(producto => producto.id_product).indexOf(prod.id_product)
         newCart.splice(index,1)
         setCart(newCart)
     }

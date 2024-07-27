@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { motion, AnimatePresence } from 'framer-motion'
 import { ProductsContext } from '../context/ProductsContext'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
 export default function Product() {
   let { id } = useParams()
+  const { user } = useAuth();
   const { getProductById, productos } = useContext(ProductsContext)
   const { addCart } = useCart()
   const [producto, setProducto] = useState({})
@@ -20,9 +22,7 @@ export default function Product() {
     })
   }, [id])
 
-  const user = useSelector(state => state?.user?.user)
   const [noticeLogin, setNoticeLogin] = useState(null)
-  console.log(producto)
 
   const handleMainImage = (e) => {
 
@@ -47,7 +47,7 @@ export default function Product() {
       <div className='pt-[20vh] pb-[10vh] w-[90%] mx-auto'>
         {/* SECCION PRODUCTO SELECCIONADO */}
         <section className='max-[700px]:flex-col
-        flex items-center border-bC border-white shadow-lg shadow-violet-500/50'>
+        flex items-center border-b border-white shadow-lg shadow-violet-500/50'>
           {/* DATOS PRODUCTO SELECCIONADO */}
           <article className='max-[700px]:py-2
           py-[300px] flex flex-col items-center justify-center text-white px-6 text-center bg-[#202020] h-[430px] md:w-1/2'>

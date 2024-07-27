@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
             }})
 
             if (res.status !== 200) return { error: true, msg: res.data.msg };
-
+            location.href("/")
             setUser(res.data.user);
             return { error: false, msg: res.data.msg, user: res.data.user };
 

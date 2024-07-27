@@ -10,7 +10,6 @@ export default function CartSummary() {
         const derivedCartNew = getDerivedCart(cart)
         setDerivedCart(derivedCartNew)
     },[cart])
-   console.log(derivedCart)
     return (
         <div className='min-h-[80%] overflow-y-auto'>
             {cart.length >= 1
@@ -20,9 +19,9 @@ export default function CartSummary() {
                         derivedCart.map((item,idx) => {
                             return <article className='w-full flex items-center border-b' key={item.id_producto}>
                                 <div className='w-3/4 flex items-center'>
-                                    <img src={`/productos/${item.img}.png`} alt={item.producto} className='w-[30%]'/>
+                                    <img src={`/productos/${item.img_1}.png`} alt={item.name} className='w-[30%]'/>
                                     <div className='text-left text-white'>
-                                        <h1 className='font-semibold'>{item.producto}</h1>
+                                        <h1 className='font-semibold'>{item.name}</h1>
                                         <h5>Subtotal: ${item.totalPrice}</h5>
                                     </div>
                                 </div>

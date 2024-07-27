@@ -11,7 +11,7 @@ import { ProductsContext } from './../context/ProductsContext';
 
 
 export default function Products() {
-  const { productos, showAll, worldFilter, searchWorld } = useContext(ProductsContext)
+  const { productos, showAll, worldFilter, searchWorld  , getProducts} = useContext(ProductsContext)
 
   const stateNavNow = useSelector(stateNav)
   const [helloFilter, setHelloFilter] = useState(false)
@@ -37,7 +37,6 @@ export default function Products() {
         })
         .then(data => {
           // Aquí tienes acceso a la data que obtuviste del servidor
-          console.log(data);
           setCategorias(data.data)
         })
         .catch(err => {
@@ -57,7 +56,6 @@ export default function Products() {
         })
         .then(data => {
           // Aquí tienes acceso a la data que obtuviste del servidor
-          console.log(data);
           setMarcas(data.data)
         })
         .catch(err => {
@@ -135,8 +133,8 @@ export default function Products() {
           </div>
 
           {/* SECCION PRODUCTOS */}
-          <section className=' w-full bg-black bg-[#3e3e3e] lg:border-t lg:w-[85%]'>
-            <div className='pt-20 hidden lg:block lg:flex lg:flex-col'>
+          <section className=' w-full bg-black  lg:border-t lg:w-[85%]'>
+            <div className='pt-20 hidden  lg:flex lg:flex-col'>
               <h1 className='text-orange-600 text-2xl lg:text-center'>Buscar Productos</h1>
               <div className='flex justify-center'>
                 <input type="text" value={searchWorld} onChange={(e) => worldFilter(e)} className='w-[80%] bg-slate-600 p-3 rounded-2xl hover:bg-slate-400' placeholder='Buscar...' />

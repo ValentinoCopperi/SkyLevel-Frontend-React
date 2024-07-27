@@ -5,12 +5,9 @@ import { ProductsContext } from '../context/ProductsContext'
 export default function ShowProducts({ products }) {
   const { productos, maxPrice, productosFiltrados, loading } = useContext(ProductsContext)
   const [hoveredIndex, setHoveredIndex] = useState(null)
-  console.log(productosFiltrados)
 
-  if (productos.length <= 1) {
-    return <h1 className='text-orange-600 text-2xl'>Productos no encontrados :& </h1>
-  } else if (loading) {
-    return <h1 className='text-orange-600 text-2xl'>Loading products...</h1>
+  if (loading ) {
+    return <h1 className='text-orange-600  text-center text-2xl'>Loading products...</h1>
   } else {
     return (productosFiltrados.length >= 1 ? productosFiltrados : productos).filter((prod) => prod.price <= maxPrice)
       .map((prod, index) => {
